@@ -66,7 +66,13 @@ def predict_and_explain(model, x_train, input_df, model_name):
     except Exception as e:
         st.error(f"Error：{e}")
 
-
+# ✅ 定義通用二元選單函式
+def binary_radio(label):
+    return st.sidebar.radio(
+        label,
+        options=[0, 1],
+        format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)"
+    )
 
 
 
@@ -83,23 +89,24 @@ def run_model_a_page():
     # 輸入變數
     Gender = st.sidebar.radio("Gender", options=[1, 2])
     BMI = st.sidebar.number_input("BMI", 10.0, 50.0, 22.5)
-    Infection = st.sidebar.radio("Infection at admission", options=[0, 1],
-        format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)")  # 0 = No, 1 = Yes
-    Thyroid = st.sidebar.radio("Thyroid disease", options=[0, 1])  # 0 = No, 1 = Yes
-    Auto = st.sidebar.radio("Autoimmune disease", options=[0, 1])  # 0 = No, 1 = Yes
-    Diabetes = st.sidebar.radio("Diabetes", options=[0, 1])  # 0 = No, 1 = Yes
-    Hypertension = st.sidebar.radio("Hypertension", options=[0, 1])  # 0 = No, 1 = Yes
-    ASCVD = st.sidebar.radio("ASCVD", options=[0, 1])  # 0 = No, 1 = Yes
-    Chronic = st.sidebar.radio("Chronic lung disease", options=[0, 1])  # 0 = No, 1 = Yes
-    Good = st.sidebar.radio("Good syndrome", options=[0, 1])  # 0 = No, 1 = Yes
+
+    Infection = binary_radio("Infection at admission")
+    Thyroid = binary_radio("Thyroid disease")
+    Auto = binary_radio("Autoimmune disease")
+    Diabetes = binary_radio("Diabetes")
+    Hypertension = binary_radio("Hypertension")
+    ASCVD = binary_radio("ASCVD")
+    Chronic = binary_radio("Chronic lung disease")
+    Good = binary_radio("Good syndrome")
+
     Disease_duration= st.sidebar.number_input("Disease duration (month)", 0, 120, 0)
     Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission", 0, 100, 0)
     Immunosuppressant = st.sidebar.number_input("Immunosuppressant at admission", 0, 3, 0)
-    Anti_MuSK = st.sidebar.radio("Anti-MuSK", options=[0, 1])  # 0 = No, 1 = Yes
-    Anti_AChR = st.sidebar.radio("Anti-AChR", options=[0, 1])  # 0 = No, 1 = Yes
-    dSN = st.sidebar.radio("dSN", options=[0, 1])  # 0 = No, 1 = Yes
+    Anti_MuSK = binary_radio("Anti-MuSK")
+    Anti_AChR = binary_radio("Anti-AChR")
+    dSN = binary_radio("dSN")
     Thymoma = st.sidebar.number_input("Thymoma", 0, 4, 0)
-    Thymic = st.sidebar.radio("Thymic hyperplasia", options=[0, 1])  # 0 = No, 1 = Yes
+    Thymic = binary_radio("Thymic hyperplasia")
     Thymectomy = st.sidebar.number_input("Thymectomy", 0, 3, 0)
 
     NLR = st.sidebar.number_input("NLR", 0.0, 100.0, 0.0)
