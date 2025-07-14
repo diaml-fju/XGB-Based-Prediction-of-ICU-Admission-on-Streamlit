@@ -81,38 +81,25 @@ def run_model_a_page():
     x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup2_Age50D_New_FeaName.csv")
     x_train = x.drop(columns=[ "Y","MGFA clinical classification"])
     # 輸入變數
-    Gender = st.sidebar.radio("Gender", options=[1, 2],
-    format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)")
+    Gender = st.sidebar.radio("Gender", options=[1, 2])
     BMI = st.sidebar.number_input("BMI", 10.0, 50.0, 22.5)
     Infection = st.sidebar.radio("Infection at admission", options=[0, 1],
-    format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)")  # 0 = No, 1 = Yes
-    Thyroid = st.sidebar.radio("Thyroid disease", options=[0, 1],
-    format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)")  # 0 = No, 1 = Yes
-    Auto = st.sidebar.radio("Autoimmune disease", options=[0, 1],
-    format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)")  # 0 = No, 1 = Yes
-    Diabetes = st.sidebar.radio("Diabetes", options=[0, 1],
-    format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)")  # 0 = No, 1 = Yes
-    Hypertension = st.sidebar.radio("Hypertension", options=[0, 1],
-    format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)")  # 0 = No, 1 = Yes
-    ASCVD = st.sidebar.radio("ASCVD", options=[0, 1],
-    format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)")  # 0 = No, 1 = Yes
-    Chronic = st.sidebar.radio("Chronic lung disease", options=[0, 1],
-    format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)")  # 0 = No, 1 = Yes
-    Good = st.sidebar.radio("Good syndrome", options=[0, 1],
-    format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)")  # 0 = No, 1 = Yes
+        format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)")  # 0 = No, 1 = Yes
+    Thyroid = st.sidebar.radio("Thyroid disease", options=[0, 1])  # 0 = No, 1 = Yes
+    Auto = st.sidebar.radio("Autoimmune disease", options=[0, 1])  # 0 = No, 1 = Yes
+    Diabetes = st.sidebar.radio("Diabetes", options=[0, 1])  # 0 = No, 1 = Yes
+    Hypertension = st.sidebar.radio("Hypertension", options=[0, 1])  # 0 = No, 1 = Yes
+    ASCVD = st.sidebar.radio("ASCVD", options=[0, 1])  # 0 = No, 1 = Yes
+    Chronic = st.sidebar.radio("Chronic lung disease", options=[0, 1])  # 0 = No, 1 = Yes
+    Good = st.sidebar.radio("Good syndrome", options=[0, 1])  # 0 = No, 1 = Yes
     Disease_duration= st.sidebar.number_input("Disease duration (month)", 0, 120, 0)
-
     Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission", 0, 100, 0)
     Immunosuppressant = st.sidebar.number_input("Immunosuppressant at admission", 0, 3, 0)
-    Anti_MuSK = st.sidebar.radio("Anti-MuSK", options=[0, 1],
-    format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)")  # 0 = No, 1 = Yes
-    Anti_AChR = st.sidebar.radio("Anti-AChR", options=[0, 1],
-    format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)")  # 0 = No, 1 = Yes
-    dSN = st.sidebar.radio("dSN", options=[0, 1],
-    format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)")  # 0 = No, 1 = Yes
+    Anti_MuSK = st.sidebar.radio("Anti-MuSK", options=[0, 1])  # 0 = No, 1 = Yes
+    Anti_AChR = st.sidebar.radio("Anti-AChR", options=[0, 1])  # 0 = No, 1 = Yes
+    dSN = st.sidebar.radio("dSN", options=[0, 1])  # 0 = No, 1 = Yes
     Thymoma = st.sidebar.number_input("Thymoma", 0, 4, 0)
-    Thymic = st.sidebar.radio("Thymic hyperplasia", options=[0, 1],
-    format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)")  # 0 = No, 1 = Yes
+    Thymic = st.sidebar.radio("Thymic hyperplasia", options=[0, 1])  # 0 = No, 1 = Yes
     Thymectomy = st.sidebar.number_input("Thymectomy", 0, 3, 0)
 
     NLR = st.sidebar.number_input("NLR", 0.0, 100.0, 0.0)
