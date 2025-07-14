@@ -171,23 +171,27 @@ def run_model_b_page():
     # 輸入變數
     Gender = st.sidebar.radio("Gender", options=[1, 2])
     BMI = st.sidebar.number_input("BMI", 10.0, 50.0, 22.5)
-    Infection = st.sidebar.radio("Infection at admission", options=[0, 1])  # 0 = No, 1 = Yes
-    Thyroid = st.sidebar.radio("Thyroid disease", options=[0, 1])  # 0 = No, 1 = Yes
-    Auto = st.sidebar.radio("Autoimmune disease", options=[0, 1])  # 0 = No, 1 = Yes
-    Diabetes = st.sidebar.radio("Diabetes", options=[0, 1])  # 0 = No, 1 = Yes
-    Hypertension = st.sidebar.radio("Hypertension", options=[0, 1])  # 0 = No, 1 = Yes
-    ASCVD = st.sidebar.radio("ASCVD", options=[0, 1])  # 0 = No, 1 = Yes
-    Chronic = st.sidebar.radio("Chronic lung disease", options=[0, 1])  # 0 = No, 1 = Yes
-    Good = st.sidebar.radio("Good syndrome", options=[0, 1])  # 0 = No, 1 = Yes
-    Disease_duration= st.sidebar.number_input("Disease duration (month)", 0, 120, 0)
 
+    Infection = binary_radio("Infection at admission")
+    Thyroid = binary_radio("Thyroid disease")
+    Auto = binary_radio("Autoimmune disease")
+    Diabetes = binary_radio("Diabetes")
+    Hypertension = binary_radio("Hypertension")
+    ASCVD = binary_radio("ASCVD")
+    Chronic = binary_radio("Chronic lung disease")
+    Good = binary_radio("Good syndrome")
+
+    Disease_duration= st.sidebar.number_input("Disease duration (month)", 0, 120, 0)
     Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission", 0, 100, 0)
     Immunosuppressant = st.sidebar.number_input("Immunosuppressant at admission", 0, 3, 0)
-    Anti_MuSK = st.sidebar.radio("Anti-MuSK", options=[0, 1])  # 0 = No, 1 = Yes
-    Anti_AChR = st.sidebar.radio("Anti-AChR", options=[0, 1])  # 0 = No, 1 = Yes
-    dSN = st.sidebar.radio("dSN", options=[0, 1])  # 0 = No, 1 = Yes
+
+    Anti_MuSK = binary_radio("Anti-MuSK")
+    Anti_AChR = binary_radio("Anti-AChR")
+    dSN = binary_radio("dSN")
+
     Thymoma = st.sidebar.number_input("Thymoma", 0, 4, 0)
-    Thymic = st.sidebar.radio("Thymic hyperplasia", options=[0, 1])  # 0 = No, 1 = Yes
+
+    Thymic = binary_radio("Thymic hyperplasia")
     Thymectomy = st.sidebar.number_input("Thymectomy", 0, 3, 0)
 
     NLR = st.sidebar.number_input("NLR", 0.0, 100.0, 0.0)
@@ -248,16 +252,16 @@ def run_model_c_page():
     Gender = st.sidebar.radio("Gender", options=[1, 2])
     Age= st.sidebar.number_input("Age at onset (year)", 0, 100, 1)
     BMI = st.sidebar.number_input("BMI", 10.0, 50.0, 22.5)
-    Recurrent_thymoma = st.sidebar.radio("Recurrent thymoma", options=[0, 1])  # 0 = No, 1 = Yes
-    Invasive_thymoma = st.sidebar.radio("Invasive thymoma", options=[0, 1])  # 0 = No, 1 = Yes
-    Infection = st.sidebar.radio("Infection at admission", options=[0, 1])  # 0 = No, 1 = Yes
-    Thyroid = st.sidebar.radio("Thyroid disease", options=[0, 1])  # 0 = No, 1 = Yes
-    Auto = st.sidebar.radio("Autoimmune disease", options=[0, 1])  # 0 = No, 1 = Yes
-    Diabetes = st.sidebar.radio("Diabetes", options=[0, 1])  # 0 = No, 1 = Yes
-    Hypertension = st.sidebar.radio("Hypertension", options=[0, 1])  # 0 = No, 1 = Yes
-    ASCVD = st.sidebar.radio("ASCVD", options=[0, 1])  # 0 = No, 1 = Yes
-    Chronic = st.sidebar.radio("Chronic lung disease", options=[0, 1])  # 0 = No, 1 = Yes
-    Good = st.sidebar.radio("Good syndrome", options=[0, 1])  # 0 = No, 1 = Yes
+    Recurrent_thymoma = binary_radio("Recurrent thymoma")
+    Invasive_thymoma = binary_radio("Invasive thymoma")
+    Infection = binary_radio("Infection at admission")
+    Thyroid = binary_radio("Thyroid disease")
+    Auto = binary_radio("Autoimmune disease")
+    Diabetes = binary_radio("Diabetes")
+    Hypertension = binary_radio("Hypertension")
+    ASCVD = binary_radio("ASCVD")
+    Chronic = binary_radio("Chronic lung disease")
+    Good = binary_radio("Good syndrome")
     Disease_duration= st.sidebar.number_input("Disease duration (month)", 0, 300, 0)
     Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission", 0, 100, 0)
     Immunosuppressant = st.sidebar.number_input("Immunosuppressant at admission", 0, 4, 0)
@@ -316,16 +320,16 @@ def run_model_d_page():
     Gender = st.sidebar.radio("Gender", options=[1, 2])
     Age= st.sidebar.number_input("Age at onset (year)", 0, 100, 1)
     BMI = st.sidebar.number_input("BMI", 10.0, 50.0, 22.5)
-    Recurrent_thymoma = st.sidebar.radio("Recurrent thymoma", options=[0, 1])  # 0 = No, 1 = Yes
-    Invasive_thymoma = st.sidebar.radio("Invasive thymoma", options=[0, 1])  # 0 = No, 1 = Yes
-    Infection = st.sidebar.radio("Infection at admission", options=[0, 1])  # 0 = No, 1 = Yes
-    Thyroid = st.sidebar.radio("Thyroid disease", options=[0, 1])  # 0 = No, 1 = Yes
-    Auto = st.sidebar.radio("Autoimmune disease", options=[0, 1])  # 0 = No, 1 = Yes
-    Diabetes = st.sidebar.radio("Diabetes", options=[0, 1])  # 0 = No, 1 = Yes
-    Hypertension = st.sidebar.radio("Hypertension", options=[0, 1])  # 0 = No, 1 = Yes
-    ASCVD = st.sidebar.radio("ASCVD", options=[0, 1])  # 0 = No, 1 = Yes
-    Chronic = st.sidebar.radio("Chronic lung disease", options=[0, 1])  # 0 = No, 1 = Yes
-    Good = st.sidebar.radio("Good syndrome", options=[0, 1])  # 0 = No, 1 = Yes
+    Recurrent_thymoma = binary_radio("Recurrent thymoma")
+    Invasive_thymoma = binary_radio("Invasive thymoma")
+    Infection = binary_radio("Infection at admission")
+    Thyroid = binary_radio("Thyroid disease")
+    Auto = binary_radio("Autoimmune disease")
+    Diabetes = binary_radio("Diabetes")
+    Hypertension = binary_radio("Hypertension")
+    ASCVD = binary_radio("ASCVD")
+    Chronic = binary_radio("Chronic lung disease")
+    Good = binary_radio("Good syndrome")
     Disease_duration= st.sidebar.number_input("Disease duration (month)", 0, 300, 0)
     Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission", 0, 100, 0)
     Immunosuppressant = st.sidebar.number_input("Immunosuppressant at admission", 0, 4, 0)
