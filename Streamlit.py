@@ -87,7 +87,12 @@ def run_model_a_page():
     x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup2_Age50D_New_FeaName.csv")
     x_train = x.drop(columns=[ "Y","MGFA clinical classification"])
     # 輸入變數
-    Gender = st.sidebar.radio("Gender", options=[1, 2])
+    Gender = st.sidebar.radio(
+    "Gender",
+    options=[(1, "1 (Male)"), (2, "2 (Female)")],
+    format_func=lambda x: x[1]
+    )
+    Gender = Gender[0]  # ✅ 這行是關鍵：只留下值 1 或 2
     BMI = st.sidebar.number_input("BMI", 10.0, 50.0, 22.5)
 
     Infection = binary_radio("Infection at admission")
@@ -127,7 +132,6 @@ def run_model_a_page():
     "Chronic lung disease": Chronic,
     "Good syndrome": Good,
     "Disease duration (month)": Disease_duration,
-    "MGFA clinical classification": 0,
     "Prednisolone daily dose before admission": Prednisolone,
     "Immunosuppressant at admission": Immunosuppressant,
     "Anti-MuSK": Anti_MuSK,
