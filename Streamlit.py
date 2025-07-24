@@ -106,7 +106,7 @@ def run_model_a_page():
     Good = binary_radio("Good syndrome")
 
     Disease_duration= st.sidebar.number_input("Disease duration (month)", 0, 120, 0)
-    Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission(mg)", 0, 100, 0)
+    Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission (mg)", 0, 100, 0)
     #Immunosuppressant = st.sidebar.radio("Immunosuppressant at admission", 0, 3, 0)
     Immunosuppressant = st.sidebar.radio(
     "Immunosuppressant at admission", 
