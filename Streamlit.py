@@ -107,7 +107,12 @@ def run_model_a_page():
 
     Disease_duration= st.sidebar.number_input("Disease duration (month)", 0, 120, 0)
     Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission(mg)", 0, 100, 0)
-    Immunosuppressant = st.sidebar.radio("Immunosuppressant at admission", 0, 3, 0)
+    #Immunosuppressant = st.sidebar.radio("Immunosuppressant at admission", 0, 3, 0)
+    Immunosuppressant = st.sidebar.radio(
+    "Immunosuppressant at admission", 
+    options=[0, 1, 2, 3, 4], 
+    index=0
+)
     Anti_MuSK = binary_radio("Anti-MuSK")
     Anti_AChR = binary_radio("Anti-AChR")
     dSN = binary_radio("dSN")
