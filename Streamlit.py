@@ -116,7 +116,7 @@ def run_model_a_page():
     Anti_MuSK = binary_radio("Anti-MuSK")
     Anti_AChR = binary_radio("Anti-AChR")
     dSN = binary_radio("dSN")
-    Thymoma = st.sidebar.radio("Thymoma",[0, 1, 2, 3, 4])
+    Thymoma = binary_radio("Thymoma")
     Thymic = binary_radio("Thymic hyperplasia")
     Thymectomy = binary_radio("Thymectomy")
     NLR = st.sidebar.number_input("NLR", 0.0)
