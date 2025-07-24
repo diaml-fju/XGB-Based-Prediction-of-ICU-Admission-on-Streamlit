@@ -87,13 +87,14 @@ def run_model_a_page():
     x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup2_Age50D_New_FeaName.csv")
     x_train = x.drop(columns=[ "Y","MGFA clinical classification"])
     # 輸入變數
+    Age = st.sidebar.number_input("Age at onset (year)", 50,disabled=True)
     Gender = st.sidebar.radio(
     "Gender",
     options=[(1, "1 (Male)"), (2, "2 (Female)")],
     format_func=lambda x: x[1]
     )
     Gender = Gender[0]  
-    BMI = st.sidebar.number_input("BMI", 10.0, 50.0, 22.5)
+    BMI = st.sidebar.number_input("BMI", 0.0)
 
     Infection = binary_radio("Infection at admission")
     Thyroid = binary_radio("Thyroid disease")
@@ -105,19 +106,18 @@ def run_model_a_page():
     Good = binary_radio("Good syndrome")
 
     Disease_duration= st.sidebar.number_input("Disease duration (month)", 0, 120, 0)
-    Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission", 0, 100, 0)
-    Immunosuppressant = st.sidebar.number_input("Immunosuppressant at admission", 0, 3, 0)
+    Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission(mg)", 0, 100, 0)
+    Immunosuppressant = st.sidebar.radio("Immunosuppressant at admission", 0, 3, 0)
     Anti_MuSK = binary_radio("Anti-MuSK")
     Anti_AChR = binary_radio("Anti-AChR")
     dSN = binary_radio("dSN")
-    Thymoma = st.sidebar.number_input("Thymoma", 0, 4, 0)
+    Thymoma = st.sidebar.radio("Thymoma",[0, 1, 2, 3, 4])
     Thymic = binary_radio("Thymic hyperplasia")
-    Thymectomy = st.sidebar.number_input("Thymectomy", 0, 3, 0)
-
-    NLR = st.sidebar.number_input("NLR", 0.0, 100.0, 0.0)
-    PLR = st.sidebar.number_input("PLR", 0.0, 1000.0, 0.0)
-    LMR = st.sidebar.number_input("LMR", 0.0, 20.0, 0.0)
-    SII = st.sidebar.number_input("SII", 0.0, 10000000.0, 0.0)
+    Thymectomy = binary_radio("Thymectomy")
+    NLR = st.sidebar.number_input("NLR", 0.0)
+    PLR = st.sidebar.number_input("PLR", 0.0)
+    LMR = st.sidebar.number_input("LMR", 0.0)
+    SII = st.sidebar.number_input("SII", 0.0)
     
     # 建立 dict（易於維護）
     input_dict = {
