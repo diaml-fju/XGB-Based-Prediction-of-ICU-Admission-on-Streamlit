@@ -96,12 +96,12 @@ def run_model_a_page():
     format_func=lambda x: x[1]
     )
     Gender = Gender[0]  
-    Disease_duration= st.sidebar.number_input("Disease duration (month)", min_value=0.00000001, value=1.0)
-    BMI = st.sidebar.number_input("BMI", min_value=0.00000001, value=1.0)
+    Disease_duration= st.sidebar.number_input("Disease duration (month)", min_value=0.01, value=1.0)
+    BMI = st.sidebar.number_input("BMI", min_value=0.01, value=1.0)
     #MGFA
     st.sidebar.markdown('---')
     st.sidebar.markdown("### Corticosteroid variables")
-    Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission (mg)", min_value=0.00000001, value=1.0)
+    Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission (mg)", min_value=0.01, value=1.0)
     Immunosuppressant = st.sidebar.radio(
     "Immunosuppressant at admission", 
     options=[0, 1, 2, 3, 4], 
@@ -134,10 +134,10 @@ def run_model_a_page():
     st.sidebar.markdown('---')
     st.sidebar.markdown("### Systemic inflammation markers profile")
     #WBC
-    NLR = st.sidebar.number_input("NLR", min_value=0.00000001, value=1.0)
-    PLR = st.sidebar.number_input("PLR", min_value=0.00000001, value=1.0)
-    LMR = st.sidebar.number_input("LMR", min_value=0.00000001, value=1.0)
-    SII = st.sidebar.number_input("SII", min_value=0.00000001, value=1.0)
+    NLR = st.sidebar.number_input("NLR", min_value=0.01, value=1.0)
+    PLR = st.sidebar.number_input("PLR", min_value=0.01, value=1.0)
+    LMR = st.sidebar.number_input("LMR", min_value=0.01, value=1.0)
+    SII = st.sidebar.number_input("SII", min_value=0.01, value=1.0)
     
     
     
