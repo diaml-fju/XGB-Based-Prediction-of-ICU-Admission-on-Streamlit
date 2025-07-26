@@ -87,6 +87,8 @@ def run_model_a_page():
     x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup2_Age50D_New_FeaName.csv")
     x_train = x.drop(columns=[ "Y","MGFA clinical classification"])
     # 輸入變數
+    st.sidebar.markdown('---')
+    st.sidebar.markdown("### Clinical variables")
     Age = st.sidebar.number_input("Age at onset (year)", 50,disabled=True)
     Gender = st.sidebar.radio(
     "Gender",
@@ -94,35 +96,56 @@ def run_model_a_page():
     format_func=lambda x: x[1]
     )
     Gender = Gender[0]  
-    BMI = st.sidebar.number_input("BMI", min_value=0.00000001, value=1.0)
-
-    Infection = binary_radio("Infection at admission")
-    Thyroid = binary_radio("Thyroid disease")
-    Auto = binary_radio("Autoimmune disease")
-    Diabetes = binary_radio("Diabetes")
-    Hypertension = binary_radio("Hypertension")
-    ASCVD = binary_radio("ASCVD")
-    Chronic = binary_radio("Chronic lung disease")
-    Good = binary_radio("Good syndrome")
-
     Disease_duration= st.sidebar.number_input("Disease duration (month)", min_value=0.00000001, value=1.0)
+    BMI = st.sidebar.number_input("BMI", min_value=0.00000001, value=1.0)
+    #MGFA
+    st.sidebar.markdown('---')
+    st.sidebar.markdown("### Corticosteroid variables")
     Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission (mg)", min_value=0.00000001, value=1.0)
-    #Immunosuppressant = st.sidebar.radio("Immunosuppressant at admission", 0, 3, 0)
     Immunosuppressant = st.sidebar.radio(
     "Immunosuppressant at admission", 
     options=[0, 1, 2, 3, 4], 
     index=0
-)
-    Anti_MuSK = binary_radio("Anti-MuSK")
-    Anti_AChR = binary_radio("Anti-AChR")
-    dSN = binary_radio("dSN")
+    )
+
+    st.sidebar.markdown('---')
+    st.sidebar.markdown("### Thymic pathology variables")
     Thymoma = binary_radio("Thymoma")
     Thymic = binary_radio("Thymic hyperplasia")
     Thymectomy = binary_radio("Thymectomy")
+    
+    st.sidebar.markdown('---')
+    st.sidebar.markdown("### Serology of autoantibody")
+    Anti_AChR = binary_radio("Anti-AChR")
+    Anti_MuSK = binary_radio("Anti-MuSK")
+    dSN = binary_radio("dSN")
+
+    st.sidebar.markdown('---')
+    st.sidebar.markdown("### Comorbidity variables")
+    Infection = binary_radio("Infection at admission")
+    Thyroid = binary_radio("Thyroid disease")
+    Diabetes = binary_radio("Diabetes")
+    Hypertension = binary_radio("Hypertension")
+    Auto = binary_radio("Autoimmune disease")
+    ASCVD = binary_radio("ASCVD")
+    Chronic = binary_radio("Chronic lung disease")
+    Good = binary_radio("Good syndrome")
+
+    st.sidebar.markdown('---')
+    st.sidebar.markdown("### Systemic inflammation markers profile")
+    #WBC
     NLR = st.sidebar.number_input("NLR", min_value=0.00000001, value=1.0)
     PLR = st.sidebar.number_input("PLR", min_value=0.00000001, value=1.0)
     LMR = st.sidebar.number_input("LMR", min_value=0.00000001, value=1.0)
     SII = st.sidebar.number_input("SII", min_value=0.00000001, value=1.0)
+    
+    
+    
+    
+    
+    
+    
+    
 
     
     # 建立 dict（易於維護）
