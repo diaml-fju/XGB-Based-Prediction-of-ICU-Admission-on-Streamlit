@@ -139,15 +139,6 @@ def run_model_a_page():
     LMR = st.sidebar.number_input("LMR", min_value=0.01, value=1.0)
     SII = st.sidebar.number_input("SII", min_value=0.01, value=1.0)
     
-    
-    
-    
-    
-    
-    
-    
-
-    
     # 建立 dict（易於維護）
     input_dict = {
     "Gender": Gender,
@@ -201,42 +192,52 @@ def run_model_b_page():
     model.load_model(r"MG_ICU_SHAP_XGB_LOMG.json")
     x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup2_Age50U_New_FeaName.csv")
     x_train = x.drop(columns=[ "Y","MGFA clinical classification"])
-    # 輸入變數
-    Age = st.sidebar.number_input("Age at onset (year)", 0, 50,disabled=True)
-    Gender = st.sidebar.radio(
-    "Gender",
-    options=[(1, "1 (Male)"), (2, "2 (Female)")],
-    format_func=lambda x: x[1]
-    )
-    Gender = Gender[0]
-    BMI = st.sidebar.number_input("BMI" ,min_value=0.00000001, value=1.0)
+    # ➤ Clinical variables
+    with st.sidebar.expander("Clinical variables", expanded=True):
+        Age = st.number_input("Age at onset (year)", 50, disabled=True)
+        Gender = st.radio(
+            "Gender",
+            options=[(1, "1 (Male)"), (2, "2 (Female)")],
+            format_func=lambda x: x[1]
+        )
+        Gender = Gender[0]
+        Disease_duration = st.number_input("Disease duration (month)", min_value=0.01, value=1.0)
+        BMI = st.number_input("BMI", min_value=0.01, value=1.0)
 
-    Infection = binary_radio("Infection at admission")
-    Thyroid = binary_radio("Thyroid disease")
-    Auto = binary_radio("Autoimmune disease")
-    Diabetes = binary_radio("Diabetes")
-    Hypertension = binary_radio("Hypertension")
-    ASCVD = binary_radio("ASCVD")
-    Chronic = binary_radio("Chronic lung disease")
-    Good = binary_radio("Good syndrome")
+    # ➤ Corticosteroid variables
+    with st.sidebar.expander("Corticosteroid variables", expanded=False):
+        Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.01, value=1.0)
+        Immunosuppressant = st.radio("Immunosuppressant at admission", options=[0, 1, 2, 3, 4], index=0)
 
-    Disease_duration= st.sidebar.number_input("Disease duration (month)", min_value=0.00000001, value=1.0)
-    Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission (mg)", min_value=0.00000001, value=1.0)
-    Immunosuppressant = st.sidebar.number_input("Immunosuppressant at admission", min_value=0.00000001, value=1.0)
+    # ➤ Thymic pathology
+    with st.sidebar.expander("Thymic pathology variables", expanded=False):
+        Thymoma = binary_radio("Thymoma")
+        Thymic = binary_radio("Thymic hyperplasia")
+        Thymectomy = binary_radio("Thymectomy")
 
-    Anti_MuSK = binary_radio("Anti-MuSK")
-    Anti_AChR = binary_radio("Anti-AChR")
-    dSN = binary_radio("dSN")
+    # ➤ Serology
+    with st.sidebar.expander("Serology of autoantibody", expanded=False):
+        Anti_AChR = binary_radio("Anti-AChR")
+        Anti_MuSK = binary_radio("Anti-MuSK")
+        dSN = binary_radio("dSN")
 
-    Thymoma = st.sidebar.number_input("Thymoma", min_value=0.00000001, value=1.0)
+    # ➤ Comorbidity
+    with st.sidebar.expander("Comorbidity variables", expanded=False):
+        Infection = binary_radio("Infection at admission")
+        Thyroid = binary_radio("Thyroid disease")
+        Diabetes = binary_radio("Diabetes")
+        Hypertension = binary_radio("Hypertension")
+        Auto = binary_radio("Autoimmune disease")
+        ASCVD = binary_radio("ASCVD")
+        Chronic = binary_radio("Chronic lung disease")
+        Good = binary_radio("Good syndrome")
 
-    Thymic = binary_radio("Thymic hyperplasia")
-    Thymectomy = st.sidebar.number_input("Thymectomy", min_value=0.00000001, value=1.0)
-
-    NLR = st.sidebar.number_input("NLR", min_value=0.00000001, value=1.0)
-    PLR = st.sidebar.number_input("PLR", min_value=0.00000001, value=1.0)
-    LMR = st.sidebar.number_input("LMR", min_value=0.00000001, value=1.0)
-    SII = st.sidebar.number_input("SII", min_value=0.00000001, value=1.0)
+    # ➤ Inflammation
+    with st.sidebar.expander("🔥 Systemic inflammation markers", expanded=False):
+        NLR = st.number_input("NLR", min_value=0.01, value=1.0)
+        PLR = st.number_input("PLR", min_value=0.01, value=1.0)
+        LMR = st.number_input("LMR", min_value=0.01, value=1.0)
+        SII = st.number_input("SII", min_value=0.01, value=1.0)
 
     
     # 建立 dict（易於維護）
