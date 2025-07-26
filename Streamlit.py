@@ -298,27 +298,42 @@ def run_model_c_page():
     # 輸入變數
     st.sidebar.markdown('---')
     st.sidebar.markdown("### Clinical variables")
+    Age= st.sidebar.number_input("Age at onset (year)", min_value=0.00000001, value=1.0)
     Gender = st.sidebar.radio(
     "Gender",
     options=[(1, "1 (Male)"), (2, "2 (Female)")],
     format_func=lambda x: x[1]
     )
     Gender = Gender[0]
-    Age= st.sidebar.number_input("Age at onset (year)", min_value=0.00000001, value=1.0)
+    Disease_duration= st.sidebar.number_input("Disease duration (month)", min_value=0.00000001, value=1.0)
     BMI = st.sidebar.number_input("BMI", min_value=0.00000001, value=1.0)
+    #MGFA
+
+    st.sidebar.markdown('---')
+    st.sidebar.markdown("### Corticosteroid variables")
+    Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission", min_value=0.00000001, value=1.0)
+    Immunosuppressant = st.sidebar.number_input("Immunosuppressant at admission", min_value=0.00000001, value=1.0)
+
+    st.sidebar.markdown('---')
+    st.sidebar.markdown("### Thymic pathology variables")
+
     Recurrent_thymoma = binary_radio("Recurrent thymoma")
     Invasive_thymoma = binary_radio("Invasive thymoma")
+
+    st.sidebar.markdown('---')
+    st.sidebar.markdown("### Comorbidity variables")
     Infection = binary_radio("Infection at admission")
     Thyroid = binary_radio("Thyroid disease")
-    Auto = binary_radio("Autoimmune disease")
     Diabetes = binary_radio("Diabetes")
     Hypertension = binary_radio("Hypertension")
+    Auto = binary_radio("Autoimmune disease")
     ASCVD = binary_radio("ASCVD")
     Chronic = binary_radio("Chronic lung disease")
     Good = binary_radio("Good syndrome")
-    Disease_duration= st.sidebar.number_input("Disease duration (month)", min_value=0.00000001, value=1.0)
-    Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission", min_value=0.00000001, value=1.0)
-    Immunosuppressant = st.sidebar.number_input("Immunosuppressant at admission", min_value=0.00000001, value=1.0)
+    
+    st.sidebar.markdown('---')
+    st.sidebar.markdown("### Systemic inflammation markers profile")
+    #WBC
     NLR = st.sidebar.number_input("NLR", min_value=0.00000001, value=1.0)
     PLR = st.sidebar.number_input("PLR", min_value=0.00000001, value=1.0)
     LMR = st.sidebar.number_input("LMR", min_value=0.00000001, value=1.0)
