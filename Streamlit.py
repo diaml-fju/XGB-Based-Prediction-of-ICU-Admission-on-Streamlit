@@ -266,6 +266,7 @@ def run_model_c_page():
     x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup1_X9_1_FeaName.csv")
     x_train = x.drop(columns=[ "Y"])
     # 輸入變數
+    st.sidebar.markdown('---')
     st.sidebar.markdown("### Clinical variables")
     Gender = st.sidebar.radio(
     "Gender",
