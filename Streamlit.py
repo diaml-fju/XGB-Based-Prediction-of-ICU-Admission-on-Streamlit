@@ -186,7 +186,7 @@ def run_model_b_page():
     format_func=lambda x: x[1]
     )
     Gender = Gender[0]
-    BMI = st.sidebar.number_input("BMI" min_value=0.00000001, value=1.0)
+    BMI = st.sidebar.number_input("BMI" ,min_value=0.00000001, value=1.0)
 
     Infection = binary_radio("Infection at admission")
     Thyroid = binary_radio("Thyroid disease")
