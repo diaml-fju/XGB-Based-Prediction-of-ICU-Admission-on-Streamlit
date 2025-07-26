@@ -186,11 +186,11 @@ def run_model_a_page():
 
 def run_model_b_page():
     def binary_radio(label):
-    return st.radio(
-        label,
-        options=[0, 1],
-        format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)"
-    )
+        return st.radio(
+            label,
+            options=[0, 1],
+            format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)"
+        )
     st.title("Model LOMG prediction page")
     # 模型 & 資料（你之後替換正確路徑）
     import xgboost as xgb
