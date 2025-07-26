@@ -233,7 +233,7 @@ def run_model_b_page():
         Good = binary_radio("Good syndrome")
 
     # ➤ Inflammation
-    with st.sidebar.expander("🔥 Systemic inflammation markers", expanded=False):
+    with st.sidebar.expander("Systemic inflammation markers", expanded=False):
         NLR = st.number_input("NLR", min_value=0.01, value=1.0)
         PLR = st.number_input("PLR", min_value=0.01, value=1.0)
         LMR = st.number_input("LMR", min_value=0.01, value=1.0)
