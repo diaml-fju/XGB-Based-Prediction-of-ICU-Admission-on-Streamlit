@@ -93,7 +93,8 @@ def run_model_a_page():
     Gender = st.sidebar.radio(
     "Gender",
     options=[(1, "1 (Male)"), (2, "2 (Female)")],
-    format_func=lambda x: x[1]
+    format_func=lambda x: x[1],
+    key="EOMG_Gender"
     )
     Gender = Gender[0]  
     Disease_duration= st.sidebar.number_input("Disease duration (month)", min_value=0.01, value=1.0, key="EOMG_Disease_duration")
@@ -105,39 +106,40 @@ def run_model_a_page():
     Immunosuppressant = st.sidebar.radio(
     "Immunosuppressant at admission", 
     options=[0, 1, 2, 3, 4], 
-    index=0
+    index=0,
+    key="EOMG_Immuno"
     )
 
     st.sidebar.markdown('---')
     st.sidebar.markdown("### Thymic pathology variables")
-    Thymoma = binary_radio("Thymoma")
-    Thymic = binary_radio("Thymic hyperplasia")
-    Thymectomy = binary_radio("Thymectomy")
+    Thymoma = binary_radio("Thymoma", key="EOMG_Thymoma")
+    Thymic = binary_radio("Thymic hyperplasia", key="EOMG_Thymic")
+    Thymectomy = binary_radio("Thymectomy", key="EOMG_Thymectomy")
     
     st.sidebar.markdown('---')
     st.sidebar.markdown("### Serology of autoantibody")
-    Anti_AChR = binary_radio("Anti-AChR")
-    Anti_MuSK = binary_radio("Anti-MuSK")
+    Anti_AChR = binary_radio("Anti-AChR", key="EOMG_Anti_AChR")
+    Anti_MuSK = binary_radio("Anti-MuSK", key="EOMG_Anti_MuSK")
     dSN = binary_radio("dSN")
 
     st.sidebar.markdown('---')
     st.sidebar.markdown("### Comorbidity variables")
-    Infection = binary_radio("Infection at admission")
-    Thyroid = binary_radio("Thyroid disease")
-    Diabetes = binary_radio("Diabetes")
-    Hypertension = binary_radio("Hypertension")
-    Auto = binary_radio("Autoimmune disease")
-    ASCVD = binary_radio("ASCVD")
-    Chronic = binary_radio("Chronic lung disease")
-    Good = binary_radio("Good syndrome")
+    Infection = binary_radio("Infection at admission", key="EOMG_Infection")
+    Thyroid = binary_radio("Thyroid disease", key="EOMG_Thyroid")
+    Diabetes = binary_radio("Diabetes", key="EOMG_Diabetes")
+    Hypertension = binary_radio("Hypertension", key="EOMG_Hypertension")
+    Auto = binary_radio("Autoimmune disease", key="EOMG_Auto")
+    ASCVD = binary_radio("ASCVD", key="EOMG_ASCVD")
+    Chronic = binary_radio("Chronic lung disease", key="EOMG_Chronic")
+    Good = binary_radio("Good syndrome", key="EOMG_Good")
 
     st.sidebar.markdown('---')
     st.sidebar.markdown("### Systemic inflammation markers profile")
     #WBC
-    NLR = st.sidebar.number_input("NLR", min_value=0.01, value=1.0)
-    PLR = st.sidebar.number_input("PLR", min_value=0.01, value=1.0)
-    LMR = st.sidebar.number_input("LMR", min_value=0.01, value=1.0)
-    SII = st.sidebar.number_input("SII", min_value=0.01, value=1.0)
+    NLR = st.sidebar.number_input("NLR", min_value=0.01, value=1.0, key="EOMG_NLR")
+    PLR = st.sidebar.number_input("PLR", min_value=0.01, value=1.0, key="EOMG_PLR")
+    LMR = st.sidebar.number_input("LMR", min_value=0.01, value=1.0, key="EOMG_LMR")
+    SII = st.sidebar.number_input("SII", min_value=0.01, value=1.0, key="EOMG_SII")
     
     # 建立 dict（易於維護）
     input_dict = {
