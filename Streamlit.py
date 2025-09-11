@@ -96,7 +96,7 @@ def run_model_a_page():
     format_func=lambda x: x[1]
     )
     Gender = Gender[0]  
-    Disease_duration= st.sidebar.number_input("Disease duration (month)", min_value=0.01, value=1.0)
+    Disease_duration= st.sidebar.number_input("Disease duration (month)", min_value=0.01, value=1.0, key="EOMG_Disease_duration")
     BMI = st.sidebar.number_input("BMI", min_value=0.01, value=1.0)
     #MGFA
     st.sidebar.markdown('---')
