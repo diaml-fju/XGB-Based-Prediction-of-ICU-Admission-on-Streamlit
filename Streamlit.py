@@ -67,11 +67,12 @@ def predict_and_explain(model, x_train, input_df, model_name):
         st.error(f"Error：{e}")
 
 # ✅ 定義通用二元選單函式
-def binary_radio(label):
+def binary_radio(label,key= None):
     return st.sidebar.radio(
         label,
         options=[0, 1],
-        format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)"
+        format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)",
+        key=key
     )
 
 
