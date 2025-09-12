@@ -81,6 +81,8 @@ def binary_radio(label,key= None):
 # ------------------------- 模型 A -------------------------
 def run_model_a_page():
     st.title("Model EOMG prediction page")
+    st.button("Download Manual", key="download_manual")
+
     # 模型 & 資料（你之後替換正確路徑）
     import xgboost as xgb
     model = xgb.XGBClassifier()
