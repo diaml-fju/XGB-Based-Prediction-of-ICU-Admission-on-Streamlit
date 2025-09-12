@@ -295,48 +295,46 @@ def run_model_c_page():
     x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup1_X9_1_FeaName.csv")
     x_train = x.drop(columns=[ "Y"])
     # 輸入變數
-    st.sidebar.markdown('---')
-    st.sidebar.markdown("### Clinical variables")
-    Age= st.sidebar.number_input("Age at onset (year)", min_value=0.00000001, value=1.0)
-    Gender = st.sidebar.radio(
-    "Gender",
-    options=[(1, "1 (Male)"), (2, "2 (Female)")],
-    format_func=lambda x: x[1]
-    )
-    Gender = Gender[0]
-    Disease_duration= st.sidebar.number_input("Disease duration (month)", min_value=0.00000001, value=1.0)
-    BMI = st.sidebar.number_input("BMI", min_value=0.00000001, value=1.0)
+    # ➤ Clinical variables
+    with st.sidebar.expander("Clinical variables", expanded=True):
+        Age= st.number_input("Age at onset (year)", min_value=0.00000001, value=1.0)
+        Gender = st.radio(
+        "Gender",
+        options=[(1, "1 (Male)"), (2, "2 (Female)")],
+        format_func=lambda x: x[1]
+        )
+        Gender = Gender[0]
+        Disease_duration= st.number_input("Disease duration (month)", min_value=0.00000001, value=1.0)
+        BMI = st.number_input("BMI", min_value=0.00000001, value=1.0)
     #MGFA
+    # ➤ Corticosteroid variables
+    with st.sidebar.expander("Corticosteroid variables", expanded=False):
+        Prednisolone = st.number_input("Prednisolone daily dose before admission", min_value=0.00000001, value=1.0)
+        Immunosuppressant = st.number_input("Immunosuppressant at admission", min_value=0.00000001, value=1.0)
+    # ➤ Thymic pathology
+    with st.sidebar.expander("Thymic pathology variables", expanded=False):
 
-    st.sidebar.markdown('---')
-    st.sidebar.markdown("### Corticosteroid variables")
-    Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission", min_value=0.00000001, value=1.0)
-    Immunosuppressant = st.sidebar.number_input("Immunosuppressant at admission", min_value=0.00000001, value=1.0)
-
-    st.sidebar.markdown('---')
-    st.sidebar.markdown("### Thymic pathology variables")
-
-    Recurrent_thymoma = binary_radio("Recurrent thymoma")
-    Invasive_thymoma = binary_radio("Invasive thymoma")
-
-    st.sidebar.markdown('---')
-    st.sidebar.markdown("### Comorbidity variables")
-    Infection = binary_radio("Infection at admission")
-    Thyroid = binary_radio("Thyroid disease")
-    Diabetes = binary_radio("Diabetes")
-    Hypertension = binary_radio("Hypertension")
-    Auto = binary_radio("Autoimmune disease")
-    ASCVD = binary_radio("ASCVD")
-    Chronic = binary_radio("Chronic lung disease")
-    Good = binary_radio("Good syndrome")
+        Recurrent_thymoma = binary_radio("Recurrent thymoma")
+        Invasive_thymoma = binary_radio("Invasive thymoma")
+    # ➤ Comorbidity variables
+    with st.sidebar.expander("Comorbidity variables", expanded=False):
     
-    st.sidebar.markdown('---')
-    st.sidebar.markdown("### Systemic inflammation markers profile")
-    #WBC
-    NLR = st.sidebar.number_input("NLR", min_value=0.00000001, value=1.0)
-    PLR = st.sidebar.number_input("PLR", min_value=0.00000001, value=1.0)
-    LMR = st.sidebar.number_input("LMR", min_value=0.00000001, value=1.0)
-    SII = st.sidebar.number_input("SII", min_value=0.00000001, value=1.0)
+        Infection = binary_radio("Infection at admission")
+        Thyroid = binary_radio("Thyroid disease")
+        Diabetes = binary_radio("Diabetes")
+        Hypertension = binary_radio("Hypertension")
+        Auto = binary_radio("Autoimmune disease")
+        ASCVD = binary_radio("ASCVD")
+        Chronic = binary_radio("Chronic lung disease")
+        Good = binary_radio("Good syndrome")
+
+    # ➤ Systemic inflammation markers profile
+    with st.sidebar.expander("Systemic inflammation markers profile", expanded=False):
+        #WBC
+        NLR = st.number_input("NLR", min_value=0.00000001, value=1.0)
+        PLR = st.number_input("PLR", min_value=0.00000001, value=1.0)
+        LMR = st.number_input("LMR", min_value=0.00000001, value=1.0)
+        SII = st.number_input("SII", min_value=0.00000001, value=1.0)
     
     # 建立 dict（易於維護）
     input_dict = {
