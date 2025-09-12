@@ -203,7 +203,7 @@ def run_model_b_page():
         Age = st.number_input("Age at onset (year)", 50, disabled=True, key="LOMG_Age")
         Gender = st.radio(
             "Gender",
-            options=[(1, "1 (Male)"), (2, "2 (Female)")],
+            options=[(1, "Male"), (2, "Female")],
             format_func=lambda x: x[1]
         )
         Gender = Gender[0]
