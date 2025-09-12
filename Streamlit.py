@@ -112,6 +112,7 @@ def run_model_a_page():
         format_func=lambda x: x[1],
         key="EOMG_Immuno"
         )
+        Immunosuppressant = Immunosuppressant[0]
     # ➤ Thymic pathology
     with st.sidebar.expander("Thymic pathology variables", expanded=False):
     
@@ -212,7 +213,13 @@ def run_model_b_page():
     # ➤ Corticosteroid variables
     with st.sidebar.expander("Corticosteroid variables", expanded=False):
         Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.01, value=1.0, key="LOMG_Prednisolone")
-        Immunosuppressant = st.radio("Immunosuppressant at admission", options=[0, 1, 2, 3, 4], index=0, key="LOMG_Immuno")
+        Immunosuppressant = st.radio(
+        "Immunosuppressant at admission", 
+        options=[(1, "Azathioprine"), (2, "Calcineurin"), (3, "Mycophenolate"), (4, "Quinine"),(0, "None of above")], 
+        format_func=lambda x: x[1],
+        key="EOMG_Immuno"
+        )
+        Immunosuppressant = Immunosuppressant[0]
 
     # ➤ Thymic pathology
     with st.sidebar.expander("Thymic pathology variables", expanded=False):
@@ -310,7 +317,13 @@ def run_model_c_page():
     # ➤ Corticosteroid variables
     with st.sidebar.expander("Corticosteroid variables", expanded=False):
         Prednisolone = st.number_input("Prednisolone daily dose before admission", min_value=0.00000001, value=1.0, key="Thymoma_Prednisolone")
-        Immunosuppressant = st.number_input("Immunosuppressant at admission", min_value=0.00000001, value=1.0, key="Thymoma_Immunosuppressant")
+        Immunosuppressant = st.radio(
+        "Immunosuppressant at admission", 
+        options=[(1, "Azathioprine"), (2, "Calcineurin"), (3, "Mycophenolate"), (4, "Quinine"),(0, "None of above")], 
+        format_func=lambda x: x[1],
+        key="EOMG_Immuno"
+        )
+        Immunosuppressant = Immunosuppressant[0]
     # ➤ Thymic pathology
     with st.sidebar.expander("Thymic pathology variables", expanded=False):
 
@@ -396,7 +409,13 @@ def run_model_d_page():
     # ➤ Corticosteroid variables
     with st.sidebar.expander("Corticosteroid variables", expanded=False):
         Prednisolone = st.number_input("Prednisolone daily dose before admission", min_value=0.00000001, value=1.0, key="NonThymoma_Prednisolone")
-        Immunosuppressant = st.number_input("Immunosuppressant at admission", min_value=0.00000001, value=1.0, key="NonThymoma_Immunosuppressant")
+        Immunosuppressant = st.radio(
+        "Immunosuppressant at admission", 
+        options=[(1, "Azathioprine"), (2, "Calcineurin"), (3, "Mycophenolate"), (4, "Quinine"),(0, "None of above")], 
+        format_func=lambda x: x[1],
+        key="EOMG_Immuno"
+        )
+        Immunosuppressant = Immunosuppressant[0]
     # ➤ Thymic pathology
     with st.sidebar.expander("Thymic pathology variables", expanded=False):
 
