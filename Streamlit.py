@@ -108,7 +108,7 @@ def run_model_a_page():
         Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.01, value=1.0)
         Immunosuppressant = st.radio(
         "Immunosuppressant at admission", 
-        options=[0, 1, 2, 3, 4], 
+        options=[(1, "Azathioprine"), (2, "Calcineurin"), (3, "Mycophenolate"), (4, "Quinine"),(0, "None of above")], 
         index=0,
         key="EOMG_Immuno"
         )
