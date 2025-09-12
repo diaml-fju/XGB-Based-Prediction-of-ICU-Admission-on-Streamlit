@@ -71,7 +71,7 @@ def binary_radio(label,key= None):
     return st.sidebar.radio(
         label,
         options=[0, 1],
-        format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)",
+        format_func=lambda x: f"Yes" if x == 1 else f"No",
         key=key
     )
 
@@ -88,59 +88,61 @@ def run_model_a_page():
     x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup2_Age50D_New_FeaName.csv")
     x_train = x.drop(columns=[ "Y","MGFA clinical classification"])
     # 輸入變數
-    st.sidebar.markdown('---')
-    st.sidebar.markdown("### Clinical variables")
-    Age = st.sidebar.number_input("Age at onset (year)", 50,disabled=True)
-    Gender = st.sidebar.radio(
-    "Gender",
-    options=[(1, "1 (Male)"), (2, "2 (Female)")],
-    format_func=lambda x: x[1],
-    key="EOMG_Gender"
-    )
-    Gender = Gender[0]  
-    Disease_duration= st.sidebar.number_input("Disease duration (month)", min_value=0.01, value=1.0, key="EOMG_Disease_duration")
-    BMI = st.sidebar.number_input("BMI", min_value=0.01, value=1.0)
+    # ➤ Clinical variables
+    with st.sidebar.expander("Clinical variables", expanded=True):
+        Age = st.sidebar.number_input("Age at onset (year)", 50,disabled=True)
+        Gender = st.sidebar.radio(
+        "Gender",
+        options=[(1, "Male"), (2, "Female")],
+        format_func=lambda x: x[1],
+        key="EOMG_Gender"
+        )
+        Gender = Gender[0]  
+        Disease_duration= st.sidebar.number_input("Disease duration (month)", min_value=0.01, value=1.0, key="EOMG_Disease_duration")
+        BMI = st.sidebar.number_input("BMI", min_value=0.01, value=1.0)
+
     #MGFA
-    st.sidebar.markdown('---')
-    st.sidebar.markdown("### Corticosteroid variables")
-    Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission (mg)", min_value=0.01, value=1.0)
-    Immunosuppressant = st.sidebar.radio(
-    "Immunosuppressant at admission", 
-    options=[0, 1, 2, 3, 4], 
-    index=0,
-    key="EOMG_Immuno"
-    )
-
-    st.sidebar.markdown('---')
-    st.sidebar.markdown("### Thymic pathology variables")
-    Thymoma = binary_radio("Thymoma", key="EOMG_Thymoma")
-    Thymic = binary_radio("Thymic hyperplasia", key="EOMG_Thymic")
-    Thymectomy = binary_radio("Thymectomy", key="EOMG_Thymectomy")
+    # ➤ Corticosteroid variables
+    with st.sidebar.expander("Corticosteroid variables", expanded=False):
     
-    st.sidebar.markdown('---')
-    st.sidebar.markdown("### Serology of autoantibody")
-    Anti_AChR = binary_radio("Anti-AChR", key="EOMG_Anti_AChR")
-    Anti_MuSK = binary_radio("Anti-MuSK", key="EOMG_Anti_MuSK")
-    dSN = binary_radio("dSN")
+        Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission (mg)", min_value=0.01, value=1.0)
+        Immunosuppressant = st.sidebar.radio(
+        "Immunosuppressant at admission", 
+        options=[0, 1, 2, 3, 4], 
+        index=0,
+        key="EOMG_Immuno"
+        )
+    # ➤ Thymic pathology
+    with st.sidebar.expander("Thymic pathology variables", expanded=False):
+    
+        Thymoma = binary_radio("Thymoma", key="EOMG_Thymoma")
+        Thymic = binary_radio("Thymic hyperplasia", key="EOMG_Thymic")
+        Thymectomy = binary_radio("Thymectomy", key="EOMG_Thymectomy")
+    
+    # ➤ Serology
+    with st.sidebar.expander("Serology of autoantibody", expanded=False):
 
-    st.sidebar.markdown('---')
-    st.sidebar.markdown("### Comorbidity variables")
-    Infection = binary_radio("Infection at admission", key="EOMG_Infection")
-    Thyroid = binary_radio("Thyroid disease", key="EOMG_Thyroid")
-    Diabetes = binary_radio("Diabetes", key="EOMG_Diabetes")
-    Hypertension = binary_radio("Hypertension", key="EOMG_Hypertension")
-    Auto = binary_radio("Autoimmune disease", key="EOMG_Auto")
-    ASCVD = binary_radio("ASCVD", key="EOMG_ASCVD")
-    Chronic = binary_radio("Chronic lung disease", key="EOMG_Chronic")
-    Good = binary_radio("Good syndrome", key="EOMG_Good")
+        Anti_AChR = binary_radio("Anti-AChR", key="EOMG_Anti_AChR")
+        Anti_MuSK = binary_radio("Anti-MuSK", key="EOMG_Anti_MuSK")
+        dSN = binary_radio("dSN")
 
-    st.sidebar.markdown('---')
-    st.sidebar.markdown("### Systemic inflammation markers profile")
-    #WBC
-    NLR = st.sidebar.number_input("NLR", min_value=0.01, value=1.0, key="EOMG_NLR")
-    PLR = st.sidebar.number_input("PLR", min_value=0.01, value=1.0, key="EOMG_PLR")
-    LMR = st.sidebar.number_input("LMR", min_value=0.01, value=1.0, key="EOMG_LMR")
-    SII = st.sidebar.number_input("SII", min_value=0.01, value=1.0, key="EOMG_SII")
+    # ➤ Comorbidity
+    with st.sidebar.expander("Comorbidity variables", expanded=False):
+        Infection = binary_radio("Infection at admission", key="EOMG_Infection")
+        Thyroid = binary_radio("Thyroid disease", key="EOMG_Thyroid")
+        Diabetes = binary_radio("Diabetes", key="EOMG_Diabetes")
+        Hypertension = binary_radio("Hypertension", key="EOMG_Hypertension")
+        Auto = binary_radio("Autoimmune disease", key="EOMG_Auto")
+        ASCVD = binary_radio("ASCVD", key="EOMG_ASCVD")
+        Chronic = binary_radio("Chronic lung disease", key="EOMG_Chronic")
+        Good = binary_radio("Good syndrome", key="EOMG_Good")
+
+    # ➤ Inflammation
+    with st.sidebar.expander("Systemic inflammation markers", expanded=False):
+        NLR = st.sidebar.number_input("NLR", min_value=0.01, value=1.0, key="EOMG_NLR")
+        PLR = st.sidebar.number_input("PLR", min_value=0.01, value=1.0, key="EOMG_PLR")
+        LMR = st.sidebar.number_input("LMR", min_value=0.01, value=1.0, key="EOMG_LMR")
+        SII = st.sidebar.number_input("SII", min_value=0.01, value=1.0, key="EOMG_SII")
     
     # 建立 dict（易於維護）
     input_dict = {
@@ -188,12 +190,6 @@ def run_model_a_page():
 # ------------------------- 模型 B -------------------------
 
 def run_model_b_page():
-    def binary_radio(label):
-        return st.radio(
-            label,
-            options=[0, 1],
-            format_func=lambda x: f"{x} (Yes)" if x == 1 else f"{x} (No)"
-        )
     st.title("Model LOMG prediction page")
     # 模型 & 資料（你之後替換正確路徑）
     import xgboost as xgb
