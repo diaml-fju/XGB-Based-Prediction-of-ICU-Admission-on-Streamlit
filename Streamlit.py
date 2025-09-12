@@ -109,7 +109,7 @@ def run_model_a_page():
         Immunosuppressant = st.radio(
         "Immunosuppressant at admission", 
         options=[(1, "Azathioprine"), (2, "Calcineurin"), (3, "Mycophenolate"), (4, "Quinine"),(0, "None of above")], 
-        index=0,
+        format_func=lambda x: x[1],
         key="EOMG_Immuno"
         )
     # ➤ Thymic pathology
