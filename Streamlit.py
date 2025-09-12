@@ -113,7 +113,7 @@ def run_model_a_page():
         key="EOMG_Immuno"
         )
     # ➤ Thymic pathology
-    with st.expander("Thymic pathology variables", expanded=False):
+    with st.sidebar.expander("Thymic pathology variables", expanded=False):
     
         Thymoma = binary_radio("Thymoma", key="EOMG_Thymoma")
         Thymic = binary_radio("Thymic hyperplasia", key="EOMG_Thymic")
