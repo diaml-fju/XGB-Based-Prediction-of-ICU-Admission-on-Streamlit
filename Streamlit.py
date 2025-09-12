@@ -90,30 +90,30 @@ def run_model_a_page():
     # 輸入變數
     # ➤ Clinical variables
     with st.sidebar.expander("Clinical variables", expanded=True):
-        Age = st.sidebar.number_input("Age at onset (year)", 50,disabled=True)
-        Gender = st.sidebar.radio(
+        Age = st.number_input("Age at onset (year)", 50,disabled=True)
+        Gender = st.radio(
         "Gender",
         options=[(1, "Male"), (2, "Female")],
         format_func=lambda x: x[1],
         key="EOMG_Gender"
         )
         Gender = Gender[0]  
-        Disease_duration= st.sidebar.number_input("Disease duration (month)", min_value=0.01, value=1.0, key="EOMG_Disease_duration")
-        BMI = st.sidebar.number_input("BMI", min_value=0.01, value=1.0)
+        Disease_duration= st.number_input("Disease duration (month)", min_value=0.01, value=1.0, key="EOMG_Disease_duration")
+        BMI = st.number_input("BMI", min_value=0.01, value=1.0)
 
     #MGFA
     # ➤ Corticosteroid variables
     with st.sidebar.expander("Corticosteroid variables", expanded=False):
     
-        Prednisolone = st.sidebar.number_input("Prednisolone daily dose before admission (mg)", min_value=0.01, value=1.0)
-        Immunosuppressant = st.sidebar.radio(
+        Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.01, value=1.0)
+        Immunosuppressant = st.radio(
         "Immunosuppressant at admission", 
         options=[0, 1, 2, 3, 4], 
         index=0,
         key="EOMG_Immuno"
         )
     # ➤ Thymic pathology
-    with st.sidebar.expander("Thymic pathology variables", expanded=False):
+    with st.expander("Thymic pathology variables", expanded=False):
     
         Thymoma = binary_radio("Thymoma", key="EOMG_Thymoma")
         Thymic = binary_radio("Thymic hyperplasia", key="EOMG_Thymic")
@@ -139,10 +139,10 @@ def run_model_a_page():
 
     # ➤ Inflammation
     with st.sidebar.expander("Systemic inflammation markers", expanded=False):
-        NLR = st.sidebar.number_input("NLR", min_value=0.01, value=1.0, key="EOMG_NLR")
-        PLR = st.sidebar.number_input("PLR", min_value=0.01, value=1.0, key="EOMG_PLR")
-        LMR = st.sidebar.number_input("LMR", min_value=0.01, value=1.0, key="EOMG_LMR")
-        SII = st.sidebar.number_input("SII", min_value=0.01, value=1.0, key="EOMG_SII")
+        NLR = st.number_input("NLR", min_value=0.01, value=1.0, key="EOMG_NLR")
+        PLR = st.number_input("PLR", min_value=0.01, value=1.0, key="EOMG_PLR")
+        LMR = st.number_input("LMR", min_value=0.01, value=1.0, key="EOMG_LMR")
+        SII = st.number_input("SII", min_value=0.01, value=1.0, key="EOMG_SII")
     
     # 建立 dict（易於維護）
     input_dict = {
