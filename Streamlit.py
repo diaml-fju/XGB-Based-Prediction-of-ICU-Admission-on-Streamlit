@@ -81,11 +81,11 @@ def binary_radio(label,key= None):
 # ------------------------- 模型 A -------------------------
 def run_model_a_page():
     st.title("Model EOMG prediction page")
-    with open("manual.pdf", "rb") as f:
+    with open("Test.pdf", "rb") as f:
         st.download_button(
             label="📥 Download Manual (PDF)",
             data=f,
-            file_name="manual.pdf",
+            file_name="Test.pdf",
             mime="application/pdf"
         )
 
