@@ -93,7 +93,7 @@ def run_model_a_page():
     import xgboost as xgb
     model = xgb.XGBClassifier()
     model.load_model(r"MG_ICU_SHAP_XGB_EOMG.json")
-    x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup2_Age50D_New_FeaName.csv")
+    x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup2_EOMG.csv")
     x_train = x.drop(columns=[ "Y","MGFA clinical classification"])
     # 輸入變數
     # ➤ Clinical variables
@@ -204,7 +204,7 @@ def run_model_b_page():
     import xgboost as xgb
     model = xgb.XGBClassifier()
     model.load_model(r"MG_ICU_SHAP_XGB_LOMG.json")
-    x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup2_Age50U_New_FeaName.csv")
+    x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup2_LOMG.csv")
     x_train = x.drop(columns=[ "Y","MGFA clinical classification"])
     # ➤ Clinical variables
     with st.sidebar.expander("Clinical variables", expanded=True):
@@ -307,7 +307,7 @@ def run_model_c_page():
     import xgboost as xgb
     model = xgb.XGBClassifier()
     model.load_model(r"MG_ICU_SHAP_XGB_Thymoma.json")
-    x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup1_X9_1_FeaName.csv")
+    x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup1_Thymoma_Yes.csv")
     x_train = x.drop(columns=[ "Y"])
     # 輸入變數
     # ➤ Clinical variables
@@ -400,7 +400,7 @@ def run_model_d_page():
     import xgboost as xgb
     model = xgb.XGBClassifier()
     model.load_model(r"MG_ICU_SHAP_XGB_NonThymoma.json")
-    x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup1_X9_0_FeaName.csv")
+    x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup1_Thymoma_No.csv")
     x_train = x.drop(columns=[ "Y"])
     # ➤ Clinical variables
     with st.sidebar.expander("Clinical variables", expanded=True):
