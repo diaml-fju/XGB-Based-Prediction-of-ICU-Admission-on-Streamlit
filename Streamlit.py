@@ -88,6 +88,13 @@ def binary_radio(label,key= None):
         key=key
     )
 
+def binary_radio_Thymic(label,key= None):
+    return st.radio(
+        label,
+        options=[0, 1],
+        format_func=lambda x: f"Absence" if x == 1 else f"Presence",
+        key=key
+    )
 
 
 
@@ -137,9 +144,9 @@ def run_model_a_page():
     # ➤ Thymic pathology
     with st.sidebar.expander("Thymic pathology variables", expanded=False):
     
-        Thymoma = binary_radio("Thymoma", key="EOMG_Thymoma")
-        Thymic = binary_radio("Thymic hyperplasia", key="EOMG_Thymic")
-        Thymectomy = binary_radio("Thymectomy", key="EOMG_Thymectomy")
+        Thymoma = binary_radio_Thymic("Thymoma", key="EOMG_Thymoma")
+        Thymic = binary_radio_Thymic("Thymic hyperplasia", key="EOMG_Thymic")
+        Thymectomy = binary_radio_Thymic("Thymectomy", key="EOMG_Thymectomy")
     
     # ➤ Serology
     with st.sidebar.expander("Serology of autoantibody", expanded=False):
@@ -244,9 +251,9 @@ def run_model_b_page():
 
     # ➤ Thymic pathology
     with st.sidebar.expander("Thymic pathology variables", expanded=False):
-        Thymoma = binary_radio("Thymoma", key="LOMG_Thymoma")
-        Thymic = binary_radio("Thymic hyperplasia", key="LOMG_Thymic")
-        Thymectomy = binary_radio("Thymectomy", key="LOMG_Thymectomy")
+        Thymoma = binary_radio_Thymic("Thymoma", key="LOMG_Thymoma")
+        Thymic = binary_radio_Thymic("Thymic hyperplasia", key="LOMG_Thymic")
+        Thymectomy = binary_radio_Thymic("Thymectomy", key="LOMG_Thymectomy")
 
     # ➤ Serology
     with st.sidebar.expander("Serology of autoantibody", expanded=False):
