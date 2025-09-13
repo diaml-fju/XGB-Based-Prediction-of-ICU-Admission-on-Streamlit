@@ -18,12 +18,13 @@ st.sidebar.markdown("""
                     (1)Selection of the phenotype of MG""")
 st.sidebar.markdown("""(2)Enter the clinical, inflammation markers as bellowing""") 
 
-model_choice = st.sidebar.selectbox("Model", [
+model_choice = st.sidebar.selectbox("MG phenotype selection", [
     "EOMG",
     "LOMG",
     "Thymoma",
     "Non-Thymoma"
 ])
+st.sidebar.markdown("""Important varialbes input""")
 #tab1, tab2, tab3, tab4 = st.tabs(["EOMG", "LOMG", "Thymoma", "Non-Thymoma"])
 
 
