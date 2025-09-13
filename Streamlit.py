@@ -63,7 +63,7 @@ def predict_and_explain(model, x_train, input_df, model_name):
             "Thymoma":0.41806757,
             "Non-Thymoma":0.10304403
         }
-        threshold = adaptive_thresholds[model_name]
+        threshold = adaptive_thresholds[model_choice]
         if positive_prob >= threshold:
             st.error(f"Positive risk of ICU admission (Prob = {positive_prob:.4f})")
         else:
