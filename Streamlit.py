@@ -99,7 +99,7 @@ def binary_radio(label,key= None,index=None):
         label,
         options=[1, 0],
         format_func=lambda x: f"Yes" if x == 1 else f"No",
-        index=index
+        index=index,
         key=key
     )
 
