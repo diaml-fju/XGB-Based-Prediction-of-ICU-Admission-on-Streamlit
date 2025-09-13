@@ -172,13 +172,13 @@ download the file below:""")
     # ➤ Serology
     with st.sidebar.expander("Serology of autoantibody", expanded=False):
 
-        Anti_AChR = binary_radio("Anti-AChR", key="EOMG_Anti_AChR",index=1)
-        Anti_MuSK = binary_radio("Anti-MuSK", key="EOMG_Anti_MuSK",index=0)
-        dSN = binary_radio("dSN", key="EOMG_dSN",index=0)
+        Anti_AChR = binary_radio("Anti-AChR", key="EOMG_Anti_AChR",index=0)
+        Anti_MuSK = binary_radio("Anti-MuSK", key="EOMG_Anti_MuSK",index=1)
+        dSN = binary_radio("dSN", key="EOMG_dSN",index=1)
 
     # ➤ Comorbidity
     with st.sidebar.expander("Comorbidity variables", expanded=False):
-        Infection = binary_radio("Infection at admission", key="EOMG_Infection",index=1)
+        Infection = binary_radio("Infection at admission", key="EOMG_Infection",index=0)
         Thyroid = binary_radio("Thyroid disease", key="EOMG_Thyroid",index=0)
         Diabetes = binary_radio("Diabetes", key="EOMG_Diabetes",index=0)
         Hypertension = binary_radio("Hypertension", key="EOMG_Hypertension",index=0)
