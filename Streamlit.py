@@ -91,8 +91,8 @@ def binary_radio(label,key= None):
 def binary_radio_Thymic(label,key= None):
     return st.radio(
         label,
-        options=[0, 1],
-        format_func=lambda x: f"Absence" if x == 1 else f"Presence",
+        options=[1, 0],
+        format_func=lambda x: f"Absence" if x == 0 else f"Presence",
         key=key
     )
 
