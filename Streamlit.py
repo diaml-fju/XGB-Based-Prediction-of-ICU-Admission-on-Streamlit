@@ -6,6 +6,11 @@ import matplotlib.pyplot as plt
 import shap
 
 # ------------------------- 分頁切換 -------------------------
+st.sidebar.title("Explainable ML for Personalized Assessment of the Need for ICU in Myasthenia Gravis (PredMGICU)")
+st.sidebar.markdown("""
+Che-Cheng Chang, Kuan-Yu Lin, Jiann
+Horng Yeh, Hou-Chang Chiu, Tzu-Chi Liu and Chi
+Jie Lu""")
 model_choice = st.sidebar.selectbox("Model", [
     "EOMG",
     "LOMG",
