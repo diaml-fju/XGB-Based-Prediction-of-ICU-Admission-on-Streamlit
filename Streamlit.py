@@ -189,10 +189,10 @@ download the file below:""")
 
     # ➤ Inflammation
     with st.sidebar.expander("Systemic inflammation markers variables", expanded=False):
-        NLR = st.number_input("NLR", min_value=0.01, value=1.0, key="EOMG_NLR",value=4.286549708)
-        PLR = st.number_input("PLR", min_value=0.01, value=1.0, key="EOMG_PLR",value=237.6115728)
-        LMR = st.number_input("LMR", min_value=0.01, value=1.0, key="EOMG_LMR",value=2.23880597)
-        SII = st.number_input("SII", min_value=0.01, value=1.0, key="EOMG_SII",value=1654608.2)
+        NLR = st.number_input("NLR", min_value=0.01, key="EOMG_NLR",value=4.286549708)
+        PLR = st.number_input("PLR", min_value=0.01, key="EOMG_PLR",value=237.6115728)
+        LMR = st.number_input("LMR", min_value=0.01, key="EOMG_LMR",value=2.23880597)
+        SII = st.number_input("SII", min_value=0.01, key="EOMG_SII",value=1654608.2)
     
     # 建立 dict（易於維護）
     input_dict = {
