@@ -144,7 +144,7 @@ download the file below:""")
         options=[(1, "Male"), (2, "Female")],
         format_func=lambda x: x[1],
         key="EOMG_Gender",
-        value=2
+        index=2
         )
         Gender = Gender[0]  
         Disease_duration= st.number_input("Disease duration (month)", min_value=0.01, value=48.0, key="EOMG_Disease_duration")
@@ -159,7 +159,7 @@ download the file below:""")
         "Immunosuppressant at admission", 
         options=[(1, "Azathioprine"), (2, "Calcineurin"), (3, "Mycophenolate"), (4, "Quinine"),(0, "None of above")], 
         format_func=lambda x: x[1],
-        key="EOMG_Immuno",value = 0
+        key="EOMG_Immuno",index = 0
         )
         Immunosuppressant = Immunosuppressant[0]
     # ➤ Thymic pathology
