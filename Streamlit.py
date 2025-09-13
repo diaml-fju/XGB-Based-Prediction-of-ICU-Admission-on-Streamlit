@@ -229,6 +229,13 @@ def run_model_b_page():
 provide detailed guidance through 
 step-by-step instructions. Users can 
 download the file below:""")
+    with open("Test.pdf", "rb") as f:
+        st.download_button(
+            label="📥 Download of user-guide",
+            data=f,
+            file_name="Test.pdf",
+            mime="application/pdf"
+        )
     # 模型 & 資料（你之後替換正確路徑）
     import xgboost as xgb
     model = xgb.XGBClassifier()
@@ -336,6 +343,13 @@ def run_model_c_page():
 provide detailed guidance through 
 step-by-step instructions. Users can 
 download the file below:""")
+    with open("Test.pdf", "rb") as f:
+        st.download_button(
+            label="📥 Download of user-guide",
+            data=f,
+            file_name="Test.pdf",
+            mime="application/pdf"
+        )
     # 模型 & 資料（你之後替換正確路徑）
     import xgboost as xgb
     model = xgb.XGBClassifier()
@@ -433,6 +447,13 @@ def run_model_d_page():
 provide detailed guidance through 
 step-by-step instructions. Users can 
 download the file below:""")
+    with open("Test.pdf", "rb") as f:
+        st.download_button(
+            label="📥 Download of user-guide",
+            data=f,
+            file_name="Test.pdf",
+            mime="application/pdf"
+        )
     # 模型 & 資料（你之後替換正確路徑）
     import xgboost as xgb
     model = xgb.XGBClassifier()
