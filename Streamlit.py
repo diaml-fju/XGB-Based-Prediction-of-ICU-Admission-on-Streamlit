@@ -17,14 +17,14 @@ Please input your data as follows:""")
 st.sidebar.markdown("""
                     (1)Selection of the phenotype of MG""")
 st.sidebar.markdown("""(2)Enter the clinical, inflammation markers as bellowing""") 
-
-model_choice = st.sidebar.selectbox("MG phenotype selection", [
+st.sidebar.title("MG phenotype selection")
+model_choice = st.sidebar.selectbox([
     "EOMG",
     "LOMG",
     "Thymoma",
     "Non-Thymoma"
 ])
-st.sidebar.markdown("""Important varialbes input""")
+st.sidebar.title("""Important varialbes input""")
 #tab1, tab2, tab3, tab4 = st.tabs(["EOMG", "LOMG", "Thymoma", "Non-Thymoma"])
 
 
@@ -101,7 +101,7 @@ def binary_radio_Thymic(label,key= None):
 
 # ------------------------- 模型 A -------------------------
 def run_model_a_page():
-    st.title("The need of Intensive care risk prediction result")
+    st.title("Intensive care risk prediction result")
     st.markdown("""We 
 provide detailed guidance through 
 step-by-step instructions. Users can 
@@ -224,7 +224,7 @@ download the file below:""")
 # ------------------------- 模型 B -------------------------
 
 def run_model_b_page():
-    st.title("The need of Intensive care risk prediction result")
+    st.title("Intensive care risk prediction result")
     st.markdown("""We 
 provide detailed guidance through 
 step-by-step instructions. Users can 
@@ -338,7 +338,7 @@ download the file below:""")
         predict_and_explain(model, x_train, input_df, "Model B")
 
 def run_model_c_page():
-    st.title("The need of Intensive care risk prediction result")
+    st.title("Intensive care risk prediction result")
     st.markdown("""We 
 provide detailed guidance through 
 step-by-step instructions. Users can 
@@ -442,7 +442,7 @@ download the file below:""")
         predict_and_explain(model, x_train, input_df, "Model C")
 
 def run_model_d_page():
-    st.title("The need of Intensive care risk prediction result")
+    st.title("Intensive care risk prediction result")
     st.markdown("""We 
 provide detailed guidance through 
 step-by-step instructions. Users can 
