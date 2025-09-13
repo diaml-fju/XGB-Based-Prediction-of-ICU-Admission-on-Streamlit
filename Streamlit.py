@@ -11,6 +11,13 @@ st.sidebar.markdown("""
 Che-Cheng Chang, Kuan-Yu Lin, Jiann
 Horng Yeh, Hou-Chang Chiu, Tzu-Chi Liu and Chi
 Jie Lu""")
+st.sidebar.title("Instructions for Feature Input")
+st.sidebar.markdown("""
+Please input your data as follows:""")
+st.sidebar.markdown("""
+                    (1)Selection of the phenotype of MG""")
+st.sidebar.markdown("""(2)Enter the clinical, inflammation markers as bellowing""") 
+
 model_choice = st.sidebar.selectbox("Model", [
     "EOMG",
     "LOMG",
