@@ -58,7 +58,7 @@ def predict_and_explain(model, x_train, input_df, model_name):
 
         adaptive_thresholds = {
 
-            "EOMG":0.14662659,
+            "EOMG":0.14298505,
             "LOMG":0.5117961,
             "Thymoma":0.41806757,
             "Non-Thymoma":0.10304403
