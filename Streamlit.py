@@ -36,7 +36,7 @@ def predict_and_explain(model, x_train, input_df, model_name):
     import numpy as np
     import streamlit as st
     import xgboost as xgb
-    st.subheader("Predict result")
+    st.subheader("Predict of Outcomes")
 
     try:
         # 特徵對齊
@@ -50,9 +50,9 @@ def predict_and_explain(model, x_train, input_df, model_name):
         
 
         if pred_class == 1:
-            st.error("Predict result：ICU admission")
+            st.error("Positive risk of ICU admission")
         else:
-            st.success("Predict result：Not ICU admission")
+            st.success("Negative risk of ICU admission")
 
         # SHAP 解釋
         explainer = shap.TreeExplainer(model, data=background,model_output="probability", feature_perturbation="interventional")
@@ -62,7 +62,7 @@ def predict_and_explain(model, x_train, input_df, model_name):
         #st.write("Shap_values",shap_values)
         #st.write("SHAP",shap_val)
         base_val = explainer.expected_value
-        st.subheader("SHAP Waterfall explanation")
+        st.subheader("SHAP based personalized explanation")
         fig = plt.figure()
         shap.plots.waterfall(
             shap.Explanation(
@@ -100,10 +100,14 @@ def binary_radio_Thymic(label,key= None):
 
 # ------------------------- 模型 A -------------------------
 def run_model_a_page():
-    st.title("Model EOMG prediction page")
+    st.title("The need of Intensive care risk prediction result")
+    st.markdown("""We 
+provide detailed guidance through 
+step-by-step instructions. Users can 
+download the file below:""")
     with open("Test.pdf", "rb") as f:
         st.download_button(
-            label="📥 Download Manual (PDF)",
+            label="📥 Download of user-guide",
             data=f,
             file_name="Test.pdf",
             mime="application/pdf"
