@@ -167,7 +167,7 @@ def run_model_a_page():
         Good = binary_radio("Good syndrome", key="EOMG_Good")
 
     # ➤ Inflammation
-    with st.sidebar.expander("Systemic inflammation markers", expanded=False):
+    with st.sidebar.expander("Systemic inflammation markers variables", expanded=False):
         NLR = st.number_input("NLR", min_value=0.01, value=1.0, key="EOMG_NLR")
         PLR = st.number_input("PLR", min_value=0.01, value=1.0, key="EOMG_PLR")
         LMR = st.number_input("LMR", min_value=0.01, value=1.0, key="EOMG_LMR")
@@ -273,7 +273,7 @@ def run_model_b_page():
         Good = binary_radio("Good syndrome", key="LOMG_Good")
 
     # ➤ Inflammation
-    with st.sidebar.expander("Systemic inflammation markers", expanded=False):
+    with st.sidebar.expander("Systemic inflammation markers variables", expanded=False):
         NLR = st.number_input("NLR", min_value=0.01, value=1.0, key="LOMG_NLR")
         PLR = st.number_input("PLR", min_value=0.01, value=1.0, key="LOMG_PLR")
         LMR = st.number_input("LMR", min_value=0.01, value=1.0, key="LOMG_LMR")
@@ -370,7 +370,7 @@ def run_model_c_page():
         Good = binary_radio("Good syndrome", key="Thymoma_Good")
 
     # ➤ Systemic inflammation markers profile
-    with st.sidebar.expander("Systemic inflammation markers profile", expanded=False):
+    with st.sidebar.expander("Systemic inflammation markers profile variables", expanded=False):
         #WBC
         NLR = st.number_input("NLR", min_value=0.00000001, value=1.0, key="Thymoma_NLR")
         PLR = st.number_input("PLR", min_value=0.00000001, value=1.0, key="Thymoma_PLR")
@@ -462,7 +462,7 @@ def run_model_d_page():
         Good = binary_radio("Good syndrome", key="NonThymoma_Good")
 
     # ➤ Systemic inflammation markers profile
-    with st.sidebar.expander("Systemic inflammation markers profile", expanded=False):
+    with st.sidebar.expander("Systemic inflammation markers profile variables", expanded=False):
         #WBC
         NLR = st.number_input("NLR", min_value=0.00000001, value=1.0, key="NonThymoma_NLR")
         PLR = st.number_input("PLR", min_value=0.00000001, value=1.0, key="NonThymoma_PLR")
@@ -494,7 +494,7 @@ def run_model_d_page():
     "SII": SII
 }
 
-    if st.sidebar.button("Predict"):
+    if st.sidebar.button("Analysis"):
         # 用 input_dict 建立 DataFrame
        # 建立 DataFrame（按照 x_train 的欄位順序）
         input_df = pd.DataFrame([[input_dict[col] for col in x_train.columns]], columns=x_train.columns)
