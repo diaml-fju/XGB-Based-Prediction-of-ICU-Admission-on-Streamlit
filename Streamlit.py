@@ -94,21 +94,22 @@ def predict_and_explain(model, x_train, input_df, model_name):
         st.error(f"Error：{e}")
 
 # ✅ 定義通用二元選單函式
-def binary_radio(label,key= None):
+def binary_radio(label,key= None,value=None):
     return st.radio(
         label,
         options=[1, 0],
         format_func=lambda x: f"Yes" if x == 1 else f"No",
-        #value=0,
+        value=value,
         key=key
     )
 
-def binary_radio_Thymic(label,key= None):
+def binary_radio_Thymic(label,key= None,value=None):
     return st.radio(
         label,
         options=[1, 0],
         format_func=lambda x: f"Absence" if x == 0 else f"Presence",
-        key=key
+        key=key,
+        value=value
     )
 
 
@@ -137,60 +138,61 @@ download the file below:""")
     # 輸入變數
     # ➤ Clinical variables
     with st.sidebar.expander("Clinical variables", expanded=True):
-        Age = st.number_input("Age at onset (year)", 50,disabled=True)
+        #Age = st.number_input("Age at onset (year)", 50,disabled=True)
         Gender = st.radio(
         "Gender",
         options=[(1, "Male"), (2, "Female")],
         format_func=lambda x: x[1],
-        key="EOMG_Gender"
+        key="EOMG_Gender",
+        value=2
         )
         Gender = Gender[0]  
-        Disease_duration= st.number_input("Disease duration (month)", min_value=0.01, value=1.0, key="EOMG_Disease_duration")
-        BMI = st.number_input("BMI", min_value=0.01, value=1.0)
+        Disease_duration= st.number_input("Disease duration (month)", min_value=0.01, value=48.0, key="EOMG_Disease_duration")
+        BMI = st.number_input("BMI", min_value=0.01, value=17.89)
 
     #MGFA
     # ➤ Corticosteroid variables
     with st.sidebar.expander("Treatment related variables", expanded=False):
     
-        Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.0, value=0.0)
+        Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.0, value=10.0)
         Immunosuppressant = st.radio(
         "Immunosuppressant at admission", 
         options=[(1, "Azathioprine"), (2, "Calcineurin"), (3, "Mycophenolate"), (4, "Quinine"),(0, "None of above")], 
         format_func=lambda x: x[1],
-        key="EOMG_Immuno"
+        key="EOMG_Immuno",value = 0
         )
         Immunosuppressant = Immunosuppressant[0]
     # ➤ Thymic pathology
     with st.sidebar.expander("Thymic pathology variables", expanded=False):
     
-        Thymoma = binary_radio_Thymic("Thymoma", key="EOMG_Thymoma")
-        Thymic = binary_radio_Thymic("Thymic hyperplasia", key="EOMG_Thymic")
-        Thymectomy = binary_radio("Thymectomy", key="EOMG_Thymectomy")
+        Thymoma = binary_radio_Thymic("Thymoma", key="EOMG_Thymoma",value=1)
+        Thymic = binary_radio_Thymic("Thymic hyperplasia", key="EOMG_Thymic",value=0)
+        Thymectomy = binary_radio("Thymectomy", key="EOMG_Thymectomy",value=)
     
     # ➤ Serology
     with st.sidebar.expander("Serology of autoantibody", expanded=False):
 
-        Anti_AChR = binary_radio("Anti-AChR", key="EOMG_Anti_AChR")
-        Anti_MuSK = binary_radio("Anti-MuSK", key="EOMG_Anti_MuSK")
-        dSN = binary_radio("dSN")
+        Anti_AChR = binary_radio("Anti-AChR", key="EOMG_Anti_AChR",value=1)
+        Anti_MuSK = binary_radio("Anti-MuSK", key="EOMG_Anti_MuSK",value=0)
+        dSN = binary_radio("dSN", key="EOMG_dSN",value=0)
 
     # ➤ Comorbidity
     with st.sidebar.expander("Comorbidity variables", expanded=False):
-        Infection = binary_radio("Infection at admission", key="EOMG_Infection")
-        Thyroid = binary_radio("Thyroid disease", key="EOMG_Thyroid")
-        Diabetes = binary_radio("Diabetes", key="EOMG_Diabetes")
-        Hypertension = binary_radio("Hypertension", key="EOMG_Hypertension")
-        Auto = binary_radio("Autoimmune disease", key="EOMG_Auto")
-        ASCVD = binary_radio("ASCVD", key="EOMG_ASCVD")
-        Chronic = binary_radio("Chronic lung disease", key="EOMG_Chronic")
-        Good = binary_radio("Good syndrome", key="EOMG_Good")
+        Infection = binary_radio("Infection at admission", key="EOMG_Infection",value=1)
+        Thyroid = binary_radio("Thyroid disease", key="EOMG_Thyroid",value=0)
+        Diabetes = binary_radio("Diabetes", key="EOMG_Diabetes",value=0)
+        Hypertension = binary_radio("Hypertension", key="EOMG_Hypertension",value=0)
+        Auto = binary_radio("Autoimmune disease", key="EOMG_Auto",value=0)
+        ASCVD = binary_radio("ASCVD", key="EOMG_ASCVD",value=1)
+        Chronic = binary_radio("Chronic lung disease", key="EOMG_Chronic",value=1)
+        Good = binary_radio("Good syndrome", key="EOMG_Good",value=0)
 
     # ➤ Inflammation
     with st.sidebar.expander("Systemic inflammation markers variables", expanded=False):
-        NLR = st.number_input("NLR", min_value=0.01, value=1.0, key="EOMG_NLR")
-        PLR = st.number_input("PLR", min_value=0.01, value=1.0, key="EOMG_PLR")
-        LMR = st.number_input("LMR", min_value=0.01, value=1.0, key="EOMG_LMR")
-        SII = st.number_input("SII", min_value=0.01, value=1.0, key="EOMG_SII")
+        NLR = st.number_input("NLR", min_value=0.01, value=1.0, key="EOMG_NLR",value=4.286549708)
+        PLR = st.number_input("PLR", min_value=0.01, value=1.0, key="EOMG_PLR",value=237.6115728)
+        LMR = st.number_input("LMR", min_value=0.01, value=1.0, key="EOMG_LMR",value=2.23880597)
+        SII = st.number_input("SII", min_value=0.01, value=1.0, key="EOMG_SII",value=1654608.2)
     
     # 建立 dict（易於維護）
     input_dict = {
