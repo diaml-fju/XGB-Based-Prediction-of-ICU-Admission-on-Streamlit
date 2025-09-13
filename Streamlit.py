@@ -167,7 +167,7 @@ download the file below:""")
     
         Thymoma = binary_radio_Thymic("Thymoma", key="EOMG_Thymoma",value=1)
         Thymic = binary_radio_Thymic("Thymic hyperplasia", key="EOMG_Thymic",value=0)
-        Thymectomy = binary_radio("Thymectomy", key="EOMG_Thymectomy",value=)
+        Thymectomy = binary_radio("Thymectomy", key="EOMG_Thymectomy",value=1)
     
     # ➤ Serology
     with st.sidebar.expander("Serology of autoantibody", expanded=False):
@@ -260,15 +260,15 @@ download the file below:""")
     x_train = x.drop(columns=[ "Y","MGFA clinical classification"])
     # ➤ Clinical variables
     with st.sidebar.expander("Clinical variables", expanded=True):
-        Age = st.number_input("Age at onset (year)", 50, disabled=True, key="LOMG_Age")
+        #Age = st.number_input("Age at onset (year)", 50, disabled=True, key="LOMG_Age")
         Gender = st.radio(
             "Gender",
             options=[(1, "Male"), (2, "Female")],
-            format_func=lambda x: x[1]
+            format_func=lambda x: x[1],value=2
         )
         Gender = Gender[0]
-        Disease_duration = st.number_input("Disease duration (month)", min_value=0.01, value=1.0, key="LOMG_Disease_duration")
-        BMI = st.number_input("BMI", min_value=0.01, value=1.0, key="LOMG_BMI")
+        Disease_duration = st.number_input("Disease duration (month)", min_value=0.01, value=108.0, key="LOMG_Disease_duration")
+        BMI = st.number_input("BMI", min_value=0.01, value=18.63, key="LOMG_BMI")
 
     # ➤ Corticosteroid variables
     with st.sidebar.expander("Treatment related variables", expanded=False):
@@ -277,39 +277,40 @@ download the file below:""")
         "Immunosuppressant at admission", 
         options=[(1, "Azathioprine"), (2, "Calcineurin"), (3, "Mycophenolate"), (4, "Quinine"),(0, "None of above")], 
         format_func=lambda x: x[1],
-        key="EOMG_Immuno"
+        key="EOMG_Immuno",value=0
         )
         Immunosuppressant = Immunosuppressant[0]
 
     # ➤ Thymic pathology
     with st.sidebar.expander("Thymic pathology variables", expanded=False):
-        Thymoma = binary_radio_Thymic("Thymoma", key="LOMG_Thymoma")
-        Thymic = binary_radio_Thymic("Thymic hyperplasia", key="LOMG_Thymic")
-        Thymectomy = binary_radio("Thymectomy", key="LOMG_Thymectomy")
+        Thymoma = binary_radio_Thymic("Thymoma", key="LOMG_Thymoma",value=1)
+        Thymic = binary_radio_Thymic("Thymic hyperplasia", key="LOMG_Thymic",value=1)
+        Thymectomy = binary_radio("Thymectomy", key="LOMG_Thymectomy",value=1)
 
     # ➤ Serology
     with st.sidebar.expander("Serology of autoantibody", expanded=False):
-        Anti_AChR = binary_radio("Anti-AChR", key="LOMG_Anti_AChR")
-        Anti_MuSK = binary_radio("Anti-MuSK", key="LOMG_Anti_MuSK")
-        dSN = binary_radio("dSN", key="LOMG_dSN")
+        Anti_AChR = binary_radio("Anti-AChR", key="LOMG_Anti_AChR",value=1)
+        Anti_MuSK = binary_radio("Anti-MuSK", key="LOMG_Anti_MuSK",value=0)
+        dSN = binary_radio("dSN", key="LOMG_dSN",value=0)
 
     # ➤ Comorbidity
     with st.sidebar.expander("Comorbidity variables", expanded=False):
-        Infection = binary_radio("Infection at admission", key="LOMG_Infection")
-        Thyroid = binary_radio("Thyroid disease", key="LOMG_Thyroid")
-        Diabetes = binary_radio("Diabetes", key="LOMG_Diabetes")
-        Hypertension = binary_radio("Hypertension", key="LOMG_Hypertension")
-        Auto = binary_radio("Autoimmune disease", key="LOMG_Auto")
-        ASCVD = binary_radio("ASCVD", key="LOMG_ASCVD")
-        Chronic = binary_radio("Chronic lung disease", key="LOMG_Chronic")
-        Good = binary_radio("Good syndrome", key="LOMG_Good")
+        Infection = binary_radio("Infection at admission", key="LOMG_Infection",value=0)
+        Thyroid = binary_radio("Thyroid disease", key="LOMG_Thyroid",value=0)
+        Diabetes = binary_radio("Diabetes", key="LOMG_Diabetes",value=0)
+        Hypertension = binary_radio("Hypertension", key="LOMG_Hypertension",value=1)
+        Auto = binary_radio("Autoimmune disease", key="LOMG_Auto",value=0)
+        ASCVD = binary_radio("ASCVD", key="LOMG_ASCVD",value=1)
+        Chronic = binary_radio("Chronic lung disease", key="LOMG_Chronic",value=0)
+        Good = binary_radio("Good syndrome", key="LOMG_Good",value=0)
 
     # ➤ Inflammation
     with st.sidebar.expander("Systemic inflammation markers variables", expanded=False):
-        NLR = st.number_input("NLR", min_value=0.01, value=1.0, key="LOMG_NLR")
-        PLR = st.number_input("PLR", min_value=0.01, value=1.0, key="LOMG_PLR")
-        LMR = st.number_input("LMR", min_value=0.01, value=1.0, key="LOMG_LMR")
-        SII = st.number_input("SII", min_value=0.01, value=1.0, key="LOMG_SII")
+        NLR = st.number_input("NLR", min_value=0.01,  key="LOMG_NLR",value=11.41791045)
+        PLR = st.number_input("PLR", min_value=0.01,  key="LOMG_PLR",value=779.8507463)
+        LMR = st.number_input("LMR", min_value=0.01,  key="LOMG_LMR",value=3.909090909)
+        SII = st.number_input("SII", min_value=0.01,  key="LOMG_SII",value=2386343.3
+)
 
     
     # 建立 dict（易於維護）
@@ -375,50 +376,54 @@ download the file below:""")
     # 輸入變數
     # ➤ Clinical variables
     with st.sidebar.expander("Clinical variables", expanded=True):
-        Age= st.number_input("Age at onset (year)", min_value=0.00000001, value=1.0, key="Thymoma_Age")
+        Age= st.number_input("Age at onset (year)", min_value=0.00000001, value=44.0, key="Thymoma_Age")
         Gender = st.radio(
         "Gender",
         options=[(1, "Male"), (2, "Female")],
-        format_func=lambda x: x[1]
+        format_func=lambda x: x[1],value=2
         )
         Gender = Gender[0]
-        Disease_duration= st.number_input("Disease duration (month)", min_value=0.00000001, value=1.0, key="Thymoma_Disease_duration")
-        BMI = st.number_input("BMI", min_value=0.00000001, value=1.0, key="Thymoma_BMI")
+        Disease_duration= st.number_input("Disease duration (month)", min_value=0.00000001, value=48.0, key="Thymoma_Disease_duration")
+        BMI = st.number_input("BMI", min_value=0.00000001, value=17.89, key="Thymoma_BMI")
     #MGFA
     # ➤ Corticosteroid variables
     with st.sidebar.expander("Treatment related variables", expanded=False):
-        Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.0, value=0.0, key="Thymoma_Prednisolone")
+        Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.0, value=10.0, key="Thymoma_Prednisolone")
         Immunosuppressant = st.radio(
         "Immunosuppressant at admission", 
         options=[(1, "Azathioprine"), (2, "Calcineurin"), (3, "Mycophenolate"), (4, "Quinine"),(0, "None of above")], 
         format_func=lambda x: x[1],
-        key="EOMG_Immuno"
+        key="EOMG_Immuno",value = 0
         )
         Immunosuppressant = Immunosuppressant[0]
     # ➤ Thymic pathology
     with st.sidebar.expander("Thymic pathology variables", expanded=False):
 
-        Recurrent_thymoma = binary_radio("Recurrent thymoma", key="Thymoma_Recurrent_thymoma")
-        Invasive_thymoma = binary_radio("Invasive thymoma", key="Thymoma_Invasive_thymoma")
+        Recurrent_thymoma = binary_radio("Recurrent thymoma", key="Thymoma_Recurrent_thymoma",value = 0)
+        Invasive_thymoma = binary_radio("Invasive thymoma", key="Thymoma_Invasive_thymoma",value = 1)
     # ➤ Comorbidity variables
     with st.sidebar.expander("Comorbidity variables", expanded=False):
     
-        Infection = binary_radio("Infection at admission", key="Thymoma_Infection")
-        Thyroid = binary_radio("Thyroid disease", key="Thymoma_Thyroid")
-        Diabetes = binary_radio("Diabetes", key="Thymoma_Diabetes")
-        Hypertension = binary_radio("Hypertension", key="Thymoma_Hypertension")
-        Auto = binary_radio("Autoimmune disease", key="Thymoma_Auto")
-        ASCVD = binary_radio("ASCVD", key="Thymoma_ASCVD")
-        Chronic = binary_radio("Chronic lung disease", key="Thymoma_Chronic")
-        Good = binary_radio("Good syndrome", key="Thymoma_Good")
+        Infection = binary_radio("Infection at admission", key="Thymoma_Infection",value = 1)
+        Thyroid = binary_radio("Thyroid disease", key="Thymoma_Thyroid",value = 0)
+        Diabetes = binary_radio("Diabetes", key="Thymoma_Diabetes",value = 0)
+        Hypertension = binary_radio("Hypertension", key="Thymoma_Hypertension",value = 0)
+        Auto = binary_radio("Autoimmune disease", key="Thymoma_Auto",value = 0)
+        ASCVD = binary_radio("ASCVD", key="Thymoma_ASCVD",value = 1)
+        Chronic = binary_radio("Chronic lung disease", key="Thymoma_Chronic",value = 1)
+        Good = binary_radio("Good syndrome", key="Thymoma_Good",value = 0)
 
     # ➤ Systemic inflammation markers profile
     with st.sidebar.expander("Systemic inflammation markers profile variables", expanded=False):
         #WBC
-        NLR = st.number_input("NLR", min_value=0.00000001, value=1.0, key="Thymoma_NLR")
-        PLR = st.number_input("PLR", min_value=0.00000001, value=1.0, key="Thymoma_PLR")
-        LMR = st.number_input("LMR", min_value=0.00000001, value=1.0, key="Thymoma_LMR")
-        SII = st.number_input("SII", min_value=0.00000001, value=1.0, key="Thymoma_SII")
+        NLR = st.number_input("NLR", min_value=0.00000001, value=4.286549708
+, key="Thymoma_NLR")
+        PLR = st.number_input("PLR", min_value=0.00000001, value=237.6115728
+, key="Thymoma_PLR")
+        LMR = st.number_input("LMR", min_value=0.00000001, value=2.23880597
+, key="Thymoma_LMR")
+        SII = st.number_input("SII", min_value=0.00000001, value=2.23880597
+, key="Thymoma_SII")
     
     # 建立 dict（易於維護）
     input_dict = {
@@ -478,50 +483,54 @@ download the file below:""")
     x_train = x.drop(columns=[ "Y"])
     # ➤ Clinical variables
     with st.sidebar.expander("Clinical variables", expanded=True):
-        Age= st.number_input("Age at onset (year)", min_value=0.00000001, value=1.0, key="NonThymoma_Age")
+        Age= st.number_input("Age at onset (year)", min_value=0.00000001, value=26.0, key="NonThymoma_Age")
         Gender = st.radio(
         "Gender",
         options=[(1, "Male"), (2, "Female")],
-        format_func=lambda x: x[1]
+        format_func=lambda x: x[1],value=1
         )
         Gender = Gender[0]
-        Disease_duration= st.number_input("Disease duration (month)", min_value=0.00000001, value=1.0, key="NonThymoma_Disease_duration")
-        BMI = st.number_input("BMI", min_value=0.00000001, value=1.0, key="NonThymoma_BMI")
+        Disease_duration= st.number_input("Disease duration (month)", min_value=0.00000001, value=38.0, key="NonThymoma_Disease_duration")
+        BMI = st.number_input("BMI", min_value=0.00000001, value=24.96, key="NonThymoma_BMI")
     #MGFA
     # ➤ Corticosteroid variables
     with st.sidebar.expander("Treatment related variables", expanded=False):
-        Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.0, value=0.0, key="NonThymoma_Prednisolone")
+        Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.0, value=30.0, key="NonThymoma_Prednisolone")
         Immunosuppressant = st.radio(
         "Immunosuppressant at admission", 
         options=[(1, "Azathioprine"), (2, "Calcineurin"), (3, "Mycophenolate"), (4, "Quinine"),(0, "None of above")], 
         format_func=lambda x: x[1],
-        key="EOMG_Immuno"
+        key="EOMG_Immuno",value=1
         )
         Immunosuppressant = Immunosuppressant[0]
     # ➤ Thymic pathology
     with st.sidebar.expander("Thymic pathology variables", expanded=False):
 
-        Recurrent_thymoma = binary_radio("Recurrent thymoma", key="NonThymoma_Recurrent_thymoma")
-        Invasive_thymoma = binary_radio("Invasive thymoma", key="NonThymoma_Invasive_thymoma")
+        Recurrent_thymoma = binary_radio("Recurrent thymoma", key="NonThymoma_Recurrent_thymoma",value = 0)
+        Invasive_thymoma = binary_radio("Invasive thymoma", key="NonThymoma_Invasive_thymoma",value = 0)
     # ➤ Comorbidity variables
     with st.sidebar.expander("Comorbidity variables", expanded=False):
     
-        Infection = binary_radio("Infection at admission", key="NonThymoma_Infection")
-        Thyroid = binary_radio("Thyroid disease", key="NonThymoma_Thyroid")
-        Diabetes = binary_radio("Diabetes", key="NonThymoma_Diabetes")
-        Hypertension = binary_radio("Hypertension", key="NonThymoma_Hypertension")
-        Auto = binary_radio("Autoimmune disease", key="NonThymoma_Auto")
-        ASCVD = binary_radio("ASCVD", key="NonThymoma_ASCVD")
-        Chronic = binary_radio("Chronic lung disease", key="NonThymoma_Chronic")
-        Good = binary_radio("Good syndrome", key="NonThymoma_Good")
+        Infection = binary_radio("Infection at admission", key="NonThymoma_Infection",value = 1)
+        Thyroid = binary_radio("Thyroid disease", key="NonThymoma_Thyroid",value = 0)
+        Diabetes = binary_radio("Diabetes", key="NonThymoma_Diabetes",value = 0)
+        Hypertension = binary_radio("Hypertension", key="NonThymoma_Hypertension",value = 0)
+        Auto = binary_radio("Autoimmune disease", key="NonThymoma_Auto",value = 0)
+        ASCVD = binary_radio("ASCVD", key="NonThymoma_ASCVD",value = 0)
+        Chronic = binary_radio("Chronic lung disease", key="NonThymoma_Chronic",value = 0)
+        Good = binary_radio("Good syndrome", key="NonThymoma_Good",value = 0)
 
     # ➤ Systemic inflammation markers profile
     with st.sidebar.expander("Systemic inflammation markers profile variables", expanded=False):
         #WBC
-        NLR = st.number_input("NLR", min_value=0.00000001, value=1.0, key="NonThymoma_NLR")
-        PLR = st.number_input("PLR", min_value=0.00000001, value=1.0, key="NonThymoma_PLR")
-        LMR = st.number_input("LMR", min_value=0.00000001, value=1.0, key="NonThymoma_LMR")
-        SII = st.number_input("SII", min_value=0.00000001, value=1.0, key="NonThymoma_SII")
+        NLR = st.number_input("NLR", min_value=0.00000001, value=10.75
+, key="NonThymoma_NLR")
+        PLR = st.number_input("PLR", min_value=0.00000001, value=455.3571429
+, key="NonThymoma_PLR")
+        LMR = st.number_input("LMR", min_value=0.00000001, value=2.47008547
+, key="NonThymoma_LMR")
+        SII = st.number_input("SII", min_value=0.00000001, value=3289500
+, key="NonThymoma_SII")
     
     # 建立 dict（易於維護）
     input_dict = {
