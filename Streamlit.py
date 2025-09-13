@@ -58,9 +58,9 @@ def predict_and_explain(model, x_train, input_df, model_name):
 
         threshold = 0.5  # 可以依照你模型設定調整
         if positive_prob >= threshold:
-            st.error(f"Positive risk of ICU admission (Prob = {positive_prob:.2f})")
+            st.error(f"Positive risk of ICU admission (Prob = {positive_prob:.4f})")
         else:
-            st.success(f"Negative risk of ICU admission (Prob = {positive_prob:.2f})")
+            st.success(f"Negative risk of ICU admission (Prob = {positive_prob:.4f})")
         # SHAP 解釋
         explainer = shap.TreeExplainer(model, data=background,model_output="probability", feature_perturbation="interventional")
         shap_values = explainer.shap_values(input_df)
