@@ -165,9 +165,9 @@ download the file below:""")
     # ➤ Thymic pathology
     with st.sidebar.expander("Thymic pathology variables", expanded=False):
     
-        Thymoma = binary_radio_Thymic("Thymoma", key="EOMG_Thymoma",index=1)
-        Thymic = binary_radio_Thymic("Thymic hyperplasia", key="EOMG_Thymic",index=0)
-        Thymectomy = binary_radio("Thymectomy", key="EOMG_Thymectomy",index=1)
+        Thymoma = binary_radio_Thymic("Thymoma", key="EOMG_Thymoma",index=0)
+        Thymic = binary_radio_Thymic("Thymic hyperplasia", key="EOMG_Thymic",index=1)
+        Thymectomy = binary_radio("Thymectomy", key="EOMG_Thymectomy",index=0)
     
     # ➤ Serology
     with st.sidebar.expander("Serology of autoantibody", expanded=False):
@@ -179,13 +179,13 @@ download the file below:""")
     # ➤ Comorbidity
     with st.sidebar.expander("Comorbidity variables", expanded=False):
         Infection = binary_radio("Infection at admission", key="EOMG_Infection",index=0)
-        Thyroid = binary_radio("Thyroid disease", key="EOMG_Thyroid",index=0)
-        Diabetes = binary_radio("Diabetes", key="EOMG_Diabetes",index=0)
-        Hypertension = binary_radio("Hypertension", key="EOMG_Hypertension",index=0)
-        Auto = binary_radio("Autoimmune disease", key="EOMG_Auto",index=0)
-        ASCVD = binary_radio("ASCVD", key="EOMG_ASCVD",index=1)
-        Chronic = binary_radio("Chronic lung disease", key="EOMG_Chronic",index=1)
-        Good = binary_radio("Good syndrome", key="EOMG_Good",index=0)
+        Thyroid = binary_radio("Thyroid disease", key="EOMG_Thyroid",index=1)
+        Diabetes = binary_radio("Diabetes", key="EOMG_Diabetes",index=1)
+        Hypertension = binary_radio("Hypertension", key="EOMG_Hypertension",index=1)
+        Auto = binary_radio("Autoimmune disease", key="EOMG_Auto",index=1)
+        ASCVD = binary_radio("ASCVD", key="EOMG_ASCVD",index=0)
+        Chronic = binary_radio("Chronic lung disease", key="EOMG_Chronic",index=0)
+        Good = binary_radio("Good syndrome", key="EOMG_Good",index=1)
 
     # ➤ Inflammation
     with st.sidebar.expander("Systemic inflammation markers variables", expanded=False):
@@ -277,32 +277,32 @@ download the file below:""")
         "Immunosuppressant at admission", 
         options=[(1, "Azathioprine"), (2, "Calcineurin"), (3, "Mycophenolate"), (4, "Quinine"),(0, "None of above")], 
         format_func=lambda x: x[1],
-        key="EOMG_Immuno",index=0
+        key="EOMG_Immuno",index=1
         )
         Immunosuppressant = Immunosuppressant[0]
 
     # ➤ Thymic pathology
     with st.sidebar.expander("Thymic pathology variables", expanded=False):
-        Thymoma = binary_radio_Thymic("Thymoma", key="LOMG_Thymoma",index=1)
-        Thymic = binary_radio_Thymic("Thymic hyperplasia", key="LOMG_Thymic",index=1)
-        Thymectomy = binary_radio("Thymectomy", key="LOMG_Thymectomy",index=1)
+        Thymoma = binary_radio_Thymic("Thymoma", key="LOMG_Thymoma",index=0)
+        Thymic = binary_radio_Thymic("Thymic hyperplasia", key="LOMG_Thymic",index=0)
+        Thymectomy = binary_radio("Thymectomy", key="LOMG_Thymectomy",index=0)
 
     # ➤ Serology
     with st.sidebar.expander("Serology of autoantibody", expanded=False):
-        Anti_AChR = binary_radio("Anti-AChR", key="LOMG_Anti_AChR",index=1)
-        Anti_MuSK = binary_radio("Anti-MuSK", key="LOMG_Anti_MuSK",index=0)
-        dSN = binary_radio("dSN", key="LOMG_dSN",index=0)
+        Anti_AChR = binary_radio("Anti-AChR", key="LOMG_Anti_AChR",index=0)
+        Anti_MuSK = binary_radio("Anti-MuSK", key="LOMG_Anti_MuSK",index=1)
+        dSN = binary_radio("dSN", key="LOMG_dSN",index=1)
 
     # ➤ Comorbidity
     with st.sidebar.expander("Comorbidity variables", expanded=False):
-        Infection = binary_radio("Infection at admission", key="LOMG_Infection",index=0)
-        Thyroid = binary_radio("Thyroid disease", key="LOMG_Thyroid",index=0)
-        Diabetes = binary_radio("Diabetes", key="LOMG_Diabetes",index=0)
-        Hypertension = binary_radio("Hypertension", key="LOMG_Hypertension",index=1)
-        Auto = binary_radio("Autoimmune disease", key="LOMG_Auto",index=0)
-        ASCVD = binary_radio("ASCVD", key="LOMG_ASCVD",index=1)
-        Chronic = binary_radio("Chronic lung disease", key="LOMG_Chronic",index=0)
-        Good = binary_radio("Good syndrome", key="LOMG_Good",index=0)
+        Infection = binary_radio("Infection at admission", key="LOMG_Infection",index=1)
+        Thyroid = binary_radio("Thyroid disease", key="LOMG_Thyroid",index=1)
+        Diabetes = binary_radio("Diabetes", key="LOMG_Diabetes",index=1)
+        Hypertension = binary_radio("Hypertension", key="LOMG_Hypertension",index=0)
+        Auto = binary_radio("Autoimmune disease", key="LOMG_Auto",index=1)
+        ASCVD = binary_radio("ASCVD", key="LOMG_ASCVD",index=0)
+        Chronic = binary_radio("Chronic lung disease", key="LOMG_Chronic",index=1)
+        Good = binary_radio("Good syndrome", key="LOMG_Good",index=1)
 
     # ➤ Inflammation
     with st.sidebar.expander("Systemic inflammation markers variables", expanded=False):
@@ -500,25 +500,25 @@ download the file below:""")
         "Immunosuppressant at admission", 
         options=[(1, "Azathioprine"), (2, "Calcineurin"), (3, "Mycophenolate"), (4, "Quinine"),(0, "None of above")], 
         format_func=lambda x: x[1],
-        key="EOMG_Immuno",index=1
+        key="EOMG_Immuno",index=4
         )
         Immunosuppressant = Immunosuppressant[0]
     # ➤ Thymic pathology
     with st.sidebar.expander("Thymic pathology variables", expanded=False):
 
-        Recurrent_thymoma = binary_radio("Recurrent thymoma", key="NonThymoma_Recurrent_thymoma",value = 0)
-        Invasive_thymoma = binary_radio("Invasive thymoma", key="NonThymoma_Invasive_thymoma",value = 0)
+        Recurrent_thymoma = binary_radio("Recurrent thymoma", key="NonThymoma_Recurrent_thymoma",index = 1)
+        Invasive_thymoma = binary_radio("Invasive thymoma", key="NonThymoma_Invasive_thymoma",index = 1)
     # ➤ Comorbidity variables
     with st.sidebar.expander("Comorbidity variables", expanded=False):
     
-        Infection = binary_radio("Infection at admission", key="NonThymoma_Infection",value = 1)
-        Thyroid = binary_radio("Thyroid disease", key="NonThymoma_Thyroid",value = 0)
-        Diabetes = binary_radio("Diabetes", key="NonThymoma_Diabetes",value = 0)
-        Hypertension = binary_radio("Hypertension", key="NonThymoma_Hypertension",value = 0)
-        Auto = binary_radio("Autoimmune disease", key="NonThymoma_Auto",value = 0)
-        ASCVD = binary_radio("ASCVD", key="NonThymoma_ASCVD",value = 0)
-        Chronic = binary_radio("Chronic lung disease", key="NonThymoma_Chronic",value = 0)
-        Good = binary_radio("Good syndrome", key="NonThymoma_Good",value = 0)
+        Infection = binary_radio("Infection at admission", key="NonThymoma_Infection",index = 0)
+        Thyroid = binary_radio("Thyroid disease", key="NonThymoma_Thyroid",index = 1)
+        Diabetes = binary_radio("Diabetes", key="NonThymoma_Diabetes",index = 1)
+        Hypertension = binary_radio("Hypertension", key="NonThymoma_Hypertension",index = 1)
+        Auto = binary_radio("Autoimmune disease", key="NonThymoma_Auto",index = 1)
+        ASCVD = binary_radio("ASCVD", key="NonThymoma_ASCVD",index = 1)
+        Chronic = binary_radio("Chronic lung disease", key="NonThymoma_Chronic",index = 1)
+        Good = binary_radio("Good syndrome", key="NonThymoma_Good",index = 1)
 
     # ➤ Systemic inflammation markers profile
     with st.sidebar.expander("Systemic inflammation markers profile variables", expanded=False):
