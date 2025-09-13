@@ -56,7 +56,14 @@ def predict_and_explain(model, x_train, input_df, model_name):
         proba = model.predict_proba(input_df)[0]
         positive_prob = proba[1]
 
-        threshold = 0.5  # 可以依照你模型設定調整
+        adaptive_thresholds = {
+
+            "EOMG":0.14662659,
+            "LOMG":0.5117961,
+            "Thymoma":0.41806757,
+            "Non-Thymoma":0.10304403
+        }
+        threshold = adaptive_thresholds[model_name]
         if positive_prob >= threshold:
             st.error(f"Positive risk of ICU admission (Prob = {positive_prob:.4f})")
         else:
