@@ -207,7 +207,7 @@ download the file below:""")
     
 
 
-    if st.sidebar.button("Predict"):
+    if st.sidebar.button("Analysis"):
         # 用 input_dict 建立 DataFrame
        # 建立 DataFrame（按照 x_train 的欄位順序）
         input_df = pd.DataFrame([[input_dict[col] for col in x_train.columns]], columns=x_train.columns)
@@ -223,7 +223,11 @@ download the file below:""")
 # ------------------------- 模型 B -------------------------
 
 def run_model_b_page():
-    st.title("Model LOMG prediction page")
+    st.title("The need of Intensive care risk prediction result")
+    st.markdown("""We 
+provide detailed guidance through 
+step-by-step instructions. Users can 
+download the file below:""")
     # 模型 & 資料（你之後替換正確路徑）
     import xgboost as xgb
     model = xgb.XGBClassifier()
@@ -312,7 +316,7 @@ def run_model_b_page():
     "SII": SII
 }
 
-    if st.sidebar.button("Predict"):
+    if st.sidebar.button("Analysis"):
         # 用 input_dict 建立 DataFrame
        # 建立 DataFrame（按照 x_train 的欄位順序）
         input_df = pd.DataFrame([[input_dict[col] for col in x_train.columns]], columns=x_train.columns)
@@ -326,7 +330,11 @@ def run_model_b_page():
         predict_and_explain(model, x_train, input_df, "Model B")
 
 def run_model_c_page():
-    st.title("Model Thymoma prediction page")
+    st.title("The need of Intensive care risk prediction result")
+    st.markdown("""We 
+provide detailed guidance through 
+step-by-step instructions. Users can 
+download the file below:""")
     # 模型 & 資料（你之後替換正確路徑）
     import xgboost as xgb
     model = xgb.XGBClassifier()
@@ -405,7 +413,7 @@ def run_model_c_page():
     "SII": SII
 }
 
-    if st.sidebar.button("Predict"):
+    if st.sidebar.button("Analysis"):
         # 用 input_dict 建立 DataFrame
        # 建立 DataFrame（按照 x_train 的欄位順序）
         input_df = pd.DataFrame([[input_dict[col] for col in x_train.columns]], columns=x_train.columns)
@@ -419,7 +427,11 @@ def run_model_c_page():
         predict_and_explain(model, x_train, input_df, "Model C")
 
 def run_model_d_page():
-    st.title("Model NonThymoma prediction page")
+    st.title("The need of Intensive care risk prediction result")
+    st.markdown("""We 
+provide detailed guidance through 
+step-by-step instructions. Users can 
+download the file below:""")
     # 模型 & 資料（你之後替換正確路徑）
     import xgboost as xgb
     model = xgb.XGBClassifier()
