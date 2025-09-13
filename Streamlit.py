@@ -45,10 +45,15 @@ def predict_and_explain(model, x_train, input_df, model_name):
         background = x_train[model_feature_names]
 
         # 預測
-        proba = model.predict_proba(input_df)[0]
-        pred_class = int(np.argmax(proba))
+        #proba = model.predict_proba(input_df)[0]
+        #pred_class = int(np.argmax(proba))
         
 
+        #if pred_class == 1:
+        #    st.error("Positive risk of ICU admission")
+        #else:
+        #    st.success("Negative risk of ICU admission")
+        proba = model.predict_proba(input_df)[0]
         positive_prob = proba[1]
 
         threshold = 0.5  # 可以依照你模型設定調整
@@ -56,7 +61,6 @@ def predict_and_explain(model, x_train, input_df, model_name):
             st.error(f"Positive risk of ICU admission (Prob = {positive_prob:.2f})")
         else:
             st.success(f"Negative risk of ICU admission (Prob = {positive_prob:.2f})")
-
         # SHAP 解釋
         explainer = shap.TreeExplainer(model, data=background,model_output="probability", feature_perturbation="interventional")
         shap_values = explainer.shap_values(input_df)
