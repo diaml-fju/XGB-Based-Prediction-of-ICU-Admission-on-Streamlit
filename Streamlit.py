@@ -255,7 +255,7 @@ download the file below:""")
         BMI = st.number_input("BMI", min_value=0.01, value=1.0, key="LOMG_BMI")
 
     # ➤ Corticosteroid variables
-    with st.sidebar.expander("Corticosteroid variables", expanded=False):
+    with st.sidebar.expander("Treatment related variables", expanded=False):
         Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.0, value=0.0, key="LOMG_Prednisolone")
         Immunosuppressant = st.radio(
         "Immunosuppressant at admission", 
@@ -370,7 +370,7 @@ download the file below:""")
         BMI = st.number_input("BMI", min_value=0.00000001, value=1.0, key="Thymoma_BMI")
     #MGFA
     # ➤ Corticosteroid variables
-    with st.sidebar.expander("Corticosteroid variables", expanded=False):
+    with st.sidebar.expander("Treatment related variables", expanded=False):
         Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.0, value=0.0, key="Thymoma_Prednisolone")
         Immunosuppressant = st.radio(
         "Immunosuppressant at admission", 
@@ -473,7 +473,7 @@ download the file below:""")
         BMI = st.number_input("BMI", min_value=0.00000001, value=1.0, key="NonThymoma_BMI")
     #MGFA
     # ➤ Corticosteroid variables
-    with st.sidebar.expander("Corticosteroid variables", expanded=False):
+    with st.sidebar.expander("Treatment related variables", expanded=False):
         Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.0, value=0.0, key="NonThymoma_Prednisolone")
         Immunosuppressant = st.radio(
         "Immunosuppressant at admission", 
