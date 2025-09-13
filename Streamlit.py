@@ -24,7 +24,7 @@ model_choice = st.sidebar.selectbox([
     "Thymoma",
     "Non-Thymoma"
 ])
-st.sidebar.title("""Important varialbes input""")
+st.sidebar.title("Important varialbes input")
 #tab1, tab2, tab3, tab4 = st.tabs(["EOMG", "LOMG", "Thymoma", "Non-Thymoma"])
 
 
