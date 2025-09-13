@@ -124,9 +124,9 @@ def run_model_a_page():
 
     #MGFA
     # ➤ Corticosteroid variables
-    with st.sidebar.expander("Corticosteroid variables", expanded=False):
+    with st.sidebar.expander("Treatment related variables", expanded=False):
     
-        Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.01, value=1.0)
+        Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.0, value=0.0)
         Immunosuppressant = st.radio(
         "Immunosuppressant at admission", 
         options=[(1, "Azathioprine"), (2, "Calcineurin"), (3, "Mycophenolate"), (4, "Quinine"),(0, "None of above")], 
@@ -233,7 +233,7 @@ def run_model_b_page():
 
     # ➤ Corticosteroid variables
     with st.sidebar.expander("Corticosteroid variables", expanded=False):
-        Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.01, value=1.0, key="LOMG_Prednisolone")
+        Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.0, value=0.0, key="LOMG_Prednisolone")
         Immunosuppressant = st.radio(
         "Immunosuppressant at admission", 
         options=[(1, "Azathioprine"), (2, "Calcineurin"), (3, "Mycophenolate"), (4, "Quinine"),(0, "None of above")], 
@@ -337,7 +337,7 @@ def run_model_c_page():
     #MGFA
     # ➤ Corticosteroid variables
     with st.sidebar.expander("Corticosteroid variables", expanded=False):
-        Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.00000001, value=1.0, key="Thymoma_Prednisolone")
+        Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.0, value=0.0, key="Thymoma_Prednisolone")
         Immunosuppressant = st.radio(
         "Immunosuppressant at admission", 
         options=[(1, "Azathioprine"), (2, "Calcineurin"), (3, "Mycophenolate"), (4, "Quinine"),(0, "None of above")], 
@@ -429,7 +429,7 @@ def run_model_d_page():
     #MGFA
     # ➤ Corticosteroid variables
     with st.sidebar.expander("Corticosteroid variables", expanded=False):
-        Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.00000001, value=1.0, key="NonThymoma_Prednisolone")
+        Prednisolone = st.number_input("Prednisolone daily dose before admission (mg)", min_value=0.0, value=0.0, key="NonThymoma_Prednisolone")
         Immunosuppressant = st.radio(
         "Immunosuppressant at admission", 
         options=[(1, "Azathioprine"), (2, "Calcineurin"), (3, "Mycophenolate"), (4, "Quinine"),(0, "None of above")], 
