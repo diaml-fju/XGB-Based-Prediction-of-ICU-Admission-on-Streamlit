@@ -65,9 +65,9 @@ def predict_and_explain(model, x_train, input_df, model_name):
         }
         threshold = adaptive_thresholds[model_choice]
         if positive_prob >= threshold:
-            st.error(f"Positive risk of ICU admission (Prob = {positive_prob:.4f})")
+            st.error(f"Positive risk of ICU admission")
         else:
-            st.success(f"Negative risk of ICU admission (Prob = {positive_prob:.4f})")
+            st.success(f"Negative risk of ICU admission")
         # SHAP 解釋
         explainer = shap.TreeExplainer(model, data=background,model_output="probability", feature_perturbation="interventional")
         shap_values = explainer.shap_values(input_df)
