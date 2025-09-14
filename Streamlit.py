@@ -380,7 +380,7 @@ download the file below:""")
         Gender = st.radio(
         "Gender",
         options=[(1, "Male"), (2, "Female")],
-        format_func=lambda x: x[1],index=2
+        format_func=lambda x: x[1],index=1
         )
         Gender = Gender[0]
         Disease_duration= st.number_input("Disease duration (month)", min_value=0.00000001, value=48.0, key="Thymoma_Disease_duration")
