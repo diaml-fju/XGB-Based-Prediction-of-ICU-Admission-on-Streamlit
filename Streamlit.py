@@ -393,7 +393,7 @@ download the file below:""")
         "Immunosuppressant at admission", 
         options=[(1, "Azathioprine"), (2, "Calcineurin"), (3, "Mycophenolate"), (4, "Quinine"),(0, "None of above")], 
         format_func=lambda x: x[1],
-        key="EOMG_Immuno",index = 0
+        key="EOMG_Immuno",index = 4
         )
         Immunosuppressant = Immunosuppressant[0]
     # ➤ Thymic pathology
