@@ -487,7 +487,7 @@ download the file below:""")
         Gender = st.radio(
         "Gender",
         options=[(1, "Male"), (2, "Female")],
-        format_func=lambda x: x[1],index=1
+        format_func=lambda x: x[1],index=0
         )
         Gender = Gender[0]
         Disease_duration= st.number_input("Disease duration (month)", min_value=0.00000001, value=38.0, key="NonThymoma_Disease_duration")
@@ -500,7 +500,7 @@ download the file below:""")
         "Immunosuppressant at admission", 
         options=[(1, "Azathioprine"), (2, "Calcineurin"), (3, "Mycophenolate"), (4, "Quinine"),(0, "None of above")], 
         format_func=lambda x: x[1],
-        key="EOMG_Immuno",index=4
+        key="EOMG_Immuno",index=0
         )
         Immunosuppressant = Immunosuppressant[0]
     # ➤ Thymic pathology
