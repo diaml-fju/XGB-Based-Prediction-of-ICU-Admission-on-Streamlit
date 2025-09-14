@@ -399,19 +399,19 @@ download the file below:""")
     # ➤ Thymic pathology
     with st.sidebar.expander("Thymic pathology variables", expanded=False):
 
-        Recurrent_thymoma = binary_radio("Recurrent thymoma", key="Thymoma_Recurrent_thymoma",index = 0)
-        Invasive_thymoma = binary_radio("Invasive thymoma", key="Thymoma_Invasive_thymoma",index = 1)
+        Recurrent_thymoma = binary_radio("Recurrent thymoma", key="Thymoma_Recurrent_thymoma",index = 1)
+        Invasive_thymoma = binary_radio("Invasive thymoma", key="Thymoma_Invasive_thymoma",index = 0)
     # ➤ Comorbidity variables
     with st.sidebar.expander("Comorbidity variables", expanded=False):
     
-        Infection = binary_radio("Infection at admission", key="Thymoma_Infection",index = 1)
-        Thyroid = binary_radio("Thyroid disease", key="Thymoma_Thyroid",index = 0)
-        Diabetes = binary_radio("Diabetes", key="Thymoma_Diabetes",index = 0)
-        Hypertension = binary_radio("Hypertension", key="Thymoma_Hypertension",index = 0)
-        Auto = binary_radio("Autoimmune disease", key="Thymoma_Auto",index = 0)
-        ASCVD = binary_radio("ASCVD", key="Thymoma_ASCVD",index = 1)
-        Chronic = binary_radio("Chronic lung disease", key="Thymoma_Chronic",index = 1)
-        Good = binary_radio("Good syndrome", key="Thymoma_Good",index = 0)
+        Infection = binary_radio("Infection at admission", key="Thymoma_Infection",index = 0)
+        Thyroid = binary_radio("Thyroid disease", key="Thymoma_Thyroid",index = 1)
+        Diabetes = binary_radio("Diabetes", key="Thymoma_Diabetes",index = 1)
+        Hypertension = binary_radio("Hypertension", key="Thymoma_Hypertension",index = 1)
+        Auto = binary_radio("Autoimmune disease", key="Thymoma_Auto",index = 1)
+        ASCVD = binary_radio("ASCVD", key="Thymoma_ASCVD",index = 0)
+        Chronic = binary_radio("Chronic lung disease", key="Thymoma_Chronic",index = 0)
+        Good = binary_radio("Good syndrome", key="Thymoma_Good",index = 1)
 
     # ➤ Systemic inflammation markers profile
     with st.sidebar.expander("Systemic inflammation markers profile variables", expanded=False):
