@@ -529,7 +529,7 @@ download the file below:""")
 , key="NonThymoma_PLR")
         LMR = st.number_input("LMR", min_value=0.00000001, value=2.47008547
 , key="NonThymoma_LMR")
-        SII = st.number_input("SII", min_value=0.00000001, value=3289500
+        SII = st.number_input("SII", min_value=0.00000001, value=3289500.0
 , key="NonThymoma_SII")
     
     # 建立 dict（易於維護）
