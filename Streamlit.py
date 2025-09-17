@@ -8,9 +8,7 @@ import shap
 # ------------------------- 分頁切換 -------------------------
 st.sidebar.title("Explainable ML for Personalized Assessment of the Need for ICU in Myasthenia Gravis (PredMGICU)")
 st.sidebar.markdown("""
-Che-Cheng Chang, Kuan-Yu Lin, Jiann
-Horng Yeh, Hou-Chang Chiu, Tzu-Chi Liu and Chi
-Jie Lu""")
+Che-Cheng Chang, Kuan-Yu Lin, Jiann-Horng Yeh, Hou-Chang Chiu, Tzu-Chi Liu and Chi-Jie Lu""")
 st.sidebar.title("Instructions for Feature Input")
 st.sidebar.markdown("""
 Please input your data as follows:""")
@@ -116,7 +114,7 @@ def binary_radio_Thymic(label,key= None,index=None):
 
 # ------------------------- 模型 A -------------------------
 def run_model_a_page():
-    st.title("Intensive care risk prediction result")
+    st.title("Personalized ICU Risk Prediction")
     st.markdown("""We 
 provide detailed guidance through 
 step-by-step instructions. Users can 
