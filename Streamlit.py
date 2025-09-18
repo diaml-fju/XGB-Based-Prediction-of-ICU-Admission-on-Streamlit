@@ -123,7 +123,7 @@ download the file below:""")
         st.download_button(
             label="📥 Download of user-guide",
             data=f,
-            file_name="Test.pdf",
+            file_name="User guide for PredMGICU.pdf",
             mime="application/pdf"
         )
 
@@ -247,7 +247,7 @@ download the file below:""")
         st.download_button(
             label="📥 Download of user-guide",
             data=f,
-            file_name="Test.pdf",
+            file_name="User guide for PredMGICU.pdf",
             mime="application/pdf"
         )
     # 模型 & 資料（你之後替換正確路徑）
@@ -362,7 +362,7 @@ download the file below:""")
         st.download_button(
             label="📥 Download of user-guide",
             data=f,
-            file_name="Test.pdf",
+            file_name="User guide for PredMGICU.pdf",
             mime="application/pdf"
         )
     # 模型 & 資料（你之後替換正確路徑）
@@ -470,7 +470,7 @@ download the file below:""")
         st.download_button(
             label="📥 Download of user-guide",
             data=f,
-            file_name="Test.pdf",
+            file_name="User guide for PredMGICU.pdf",
             mime="application/pdf"
         )
     # 模型 & 資料（你之後替換正確路徑）
