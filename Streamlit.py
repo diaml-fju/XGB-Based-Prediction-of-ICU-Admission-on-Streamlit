@@ -119,7 +119,7 @@ def run_model_a_page():
 provide detailed guidance through 
 step-by-step instructions. Users can 
 download the file below:""")
-    with open("Test.pdf", "rb") as f:
+    with open("User guide for PredMGICU.pdf", "rb") as f:
         st.download_button(
             label="📥 Download of user-guide",
             data=f,
@@ -243,7 +243,7 @@ def run_model_b_page():
 provide detailed guidance through 
 step-by-step instructions. Users can 
 download the file below:""")
-    with open("Test.pdf", "rb") as f:
+    with open("User guide for PredMGICU.pdf", "rb") as f:
         st.download_button(
             label="📥 Download of user-guide",
             data=f,
@@ -358,7 +358,7 @@ def run_model_c_page():
 provide detailed guidance through 
 step-by-step instructions. Users can 
 download the file below:""")
-    with open("Test.pdf", "rb") as f:
+    with open("User guide for PredMGICU.pdf", "rb") as f:
         st.download_button(
             label="📥 Download of user-guide",
             data=f,
@@ -466,7 +466,7 @@ def run_model_d_page():
 provide detailed guidance through 
 step-by-step instructions. Users can 
 download the file below:""")
-    with open("Test.pdf", "rb") as f:
+    with open("User guide for PredMGICU.pdf", "rb") as f:
         st.download_button(
             label="📥 Download of user-guide",
             data=f,
