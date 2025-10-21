@@ -51,8 +51,14 @@ def predict_and_explain(model, x_train, input_df, model_name):
         #    st.error("Positive risk of ICU admission")
         #else:
         #    st.success("Negative risk of ICU admission")
-        proba = model.predict_proba(input_df)[0]
-        positive_prob = proba[1]
+
+        #舊版
+        #proba = model.predict_proba(input_df)[0]
+        #positive_prob = proba[1]
+
+        # 預測-20251021
+        proba = model.predict_proba(input_df)
+        positive_prob = float(proba[0][1])  # ✅ 確保是 float
 
         adaptive_thresholds = {
 
