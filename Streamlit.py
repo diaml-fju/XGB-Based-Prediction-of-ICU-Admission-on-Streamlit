@@ -232,7 +232,7 @@ download the file below:""")
 
         # 僅保留模型實際特徵
         input_df = input_df[model_feature_names]
-        
+        input_df = input_df.astype(float)
         predict_and_explain(model, x_train, input_df, "model A")
 
 # ------------------------- 模型 B -------------------------
@@ -349,7 +349,7 @@ download the file below:""")
 
         # 僅保留模型實際特徵
         input_df = input_df[model_feature_names]
-        
+        input_df = input_df.astype(float)
         predict_and_explain(model, x_train, input_df, "Model B")
 
 def run_model_c_page():
