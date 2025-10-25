@@ -55,20 +55,6 @@ def predict_and_explain(model, x_train, input_df, model_name):
         input_df = input_df[model_feature_names]
         background = x_train[model_feature_names]
 
-        # --- 數據清理 ---
-        def _to_float(x):
-            if isinstance(x, str):
-                x = re.sub(r'[\[\]\s,]', '', x)
-                try:
-                    return float(x)
-                except ValueError:
-                    return np.nan
-            return x
-
-        input_df = input_df.applymap(_to_float)
-        background = background.applymap(_to_float)
-        background = background.fillna(background.median())
-        input_df = input_df.fillna(background.median())
 
         # --- 預測 ---
         proba = model.predict_proba(input_df)[0, 1]
