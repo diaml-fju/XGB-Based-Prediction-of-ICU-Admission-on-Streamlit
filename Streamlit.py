@@ -44,10 +44,10 @@ def predict_and_explain(model, x_train, input_df, model_name):
         # --- 預測 ---
         proba = model.predict_proba(input_df)[0, 1]
         adaptive_thresholds = {
-            "EOMG": 0.14298505,
-            "LOMG": 0.5117961,
-            "Thymoma": 0.41806757,
-            "Non-Thymoma": 0.10304403
+            "model A": 0.14298505,
+            "model B": 0.5117961,
+            "model C": 0.41806757,
+            "model D": 0.10304403
         }
         threshold = adaptive_thresholds[model_name]
 
