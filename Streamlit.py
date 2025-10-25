@@ -36,8 +36,7 @@ def predict_and_explain(model, x_train, input_df, model_name):
     import xgboost as xgb
 
     st.subheader("Predict of Outcomes")
-    booster = model.get_booster()
-    st.write("🔍 目前模型 base_score:", booster.attributes().get("base_score", "❌ 未定義"))
+    
     try:
         # === 修正模型 base_score ===
         booster = model.get_booster()
