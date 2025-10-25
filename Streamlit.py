@@ -26,7 +26,7 @@ st.sidebar.title("Important varialbes input")
 #tab1, tab2, tab3, tab4 = st.tabs(["EOMG", "LOMG", "Thymoma", "Non-Thymoma"])
 
 # ------------------------- 共用函數：預測 + SHAP -------------------------
-def predict_and_explain(model, x_train, input_df, model_name, model_choice):
+def predict_and_explain(model, x_train, input_df, model_name):
     import shap
     import matplotlib.pyplot as plt
     import pandas as pd
