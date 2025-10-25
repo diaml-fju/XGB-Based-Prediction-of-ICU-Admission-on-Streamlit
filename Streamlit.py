@@ -112,7 +112,9 @@ def predict_and_explain(model, x_train, input_df, model_name):
         plt.close(fig)
 
     except Exception as e:
-        st.error(f"Error: {e}")
+        import traceback
+        st.error("⚠️ 發生錯誤，完整訊息如下：")
+        st.text("".join(traceback.format_exception(None, e, e.__traceback__)))
 
 
 
