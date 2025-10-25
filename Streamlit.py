@@ -4,7 +4,7 @@ import numpy as np
 import pickle
 import matplotlib.pyplot as plt
 import shap
-
+import re
 # ------------------------- 分頁切換 -------------------------
 st.sidebar.title("Explainable ML for Personalized Assessment of the Need for ICU in Myasthenia Gravis (PredMGICU)")
 st.sidebar.markdown("""
@@ -25,7 +25,30 @@ model_choice = st.sidebar.selectbox("",[
 st.sidebar.title("Important varialbes input")
 #tab1, tab2, tab3, tab4 = st.tabs(["EOMG", "LOMG", "Thymoma", "Non-Thymoma"])
 
+def clean_background(df):
+    df_clean = df.copy()
+    for col in df_clean.columns:
+        # 找出含中括號的欄位
+        bad_mask = df_clean[col].astype(str).str.contains(r'\[', regex=True)
+        if bad_mask.any():
+            st.warning(f"⚠️ 欄位 {col} 含中括號格式的字串資料，正在自動修正...")
+            st.write("前幾筆原始值：", df_clean.loc[bad_mask, col].head().tolist())
 
+            # 嘗試轉換每一個值
+            def fix_value(x):
+                if isinstance(x, str):
+                    # 移除中括號與空白
+                    x = re.sub(r'[\[\]\s]', '', x)
+                    try:
+                        return float(x)
+                    except:
+                        return np.nan
+                return x
+
+            df_clean[col] = df_clean[col].apply(fix_value)
+            st.success(f"✅ 欄位 {col} 修正完成")
+
+    return df_clean
 # ------------------------- 共用函數：預測 + SHAP -------------------------
 def predict_and_explain(model, x_train, input_df, model_name):
     import shap
@@ -61,7 +84,7 @@ def predict_and_explain(model, x_train, input_df, model_name):
         # 預測-20251021
         #proba = model.predict_proba(input_df)
         #positive_prob = float(proba[0][1])  # ✅ 確保是 float
-
+        
         adaptive_thresholds = {
 
             "EOMG":0.14298505,
