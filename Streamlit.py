@@ -35,7 +35,10 @@ def predict_and_explain(model, x_train, input_df, model_name):
     import streamlit as st
     import xgboost as xgb
     st.subheader("Predict of Outcomes")
-
+    st.write("🔍 輸入資料預檢查")
+    for col in input_df.columns:
+        val = input_df[col].iloc[0]
+        st.write(f"{col}: {val} ({type(val)})")
     try:
         # 特徵對齊
         model_feature_names = model.get_booster().feature_names
