@@ -26,63 +26,50 @@ st.sidebar.title("Important varialbes input")
 #tab1, tab2, tab3, tab4 = st.tabs(["EOMG", "LOMG", "Thymoma", "Non-Thymoma"])
 
 # ------------------------- 共用函數：預測 + SHAP -------------------------
-def predict_and_explain(model, x_train, input_df, model_name):
+def predict_and_explain(model, x_train, input_df, model_name, model_choice):
     import shap
     import matplotlib.pyplot as plt
     import pandas as pd
     import numpy as np
     import streamlit as st
     import xgboost as xgb
+
     st.subheader("Predict of Outcomes")
     try:
-        # 特徵對齊
+        # --- 特徵對齊 ---
         model_feature_names = model.get_booster().feature_names
         input_df = input_df[model_feature_names]
         background = x_train[model_feature_names]
-        # 預測
-        #proba = model.predict_proba(input_df)[0]
-        #pred_class = int(np.argmax(proba))
-        #if pred_class == 1:
-        #    st.error("Positive risk of ICU admission")
-        #else:
-        #    st.success("Negative risk of ICU admission")
 
-        #舊版
-        proba = model.predict_proba(input_df)[0]
-        positive_prob = proba[1]
-
-        # 預測-20251021
-        #proba = model.predict_proba(input_df)
-        #positive_prob = float(proba[0][1])  # ✅ 確保是 float
+        # --- 預測 ---
+        proba = model.predict_proba(input_df)[0, 1]
         adaptive_thresholds = {
-
-            "EOMG":0.14298505,
-            "LOMG":0.5117961,
-            "Thymoma":0.41806757,
-            "Non-Thymoma":0.10304403
+            "EOMG": 0.14298505,
+            "LOMG": 0.5117961,
+            "Thymoma": 0.41806757,
+            "Non-Thymoma": 0.10304403
         }
         threshold = adaptive_thresholds[model_choice]
-        if positive_prob >= threshold:
-            st.error(f"Positive risk of ICU admission")
+
+        if proba >= threshold:
+            st.error(f"Positive risk of ICU admission (probability={proba:.3f})")
         else:
-            st.success(f"Negative risk of ICU admission")
-        # SHAP 解釋 - Old version
-        explainer = shap.TreeExplainer(model, data=background,model_output="probability", feature_perturbation="interventional")
+            st.success(f"Negative risk of ICU admission (probability={proba:.3f})")
+
+        # --- SHAP 解釋 ---
+        explainer = shap.TreeExplainer(model, data=background, model_output="probability")
         shap_values = explainer.shap_values(input_df)
 
         if isinstance(shap_values, list):
-            shap_val = shap_values[1][0]  # 取 class 1 (positive) 的 shap 值
+            shap_val = shap_values[1][0]
             base_val = explainer.expected_value[1]
         else:
             shap_val = shap_values[0]
             base_val = explainer.expected_value
-        # ✅ 防止 index 錯誤
-        #shap_val = shap_values[0]
-        #st.write("Shap_values",shap_values)
-        #st.write("SHAP",shap_val)
-        base_val = explainer.expected_value
+
         st.subheader("SHAP based personalized explanation")
-        fig = plt.figure()
+
+        fig, ax = plt.subplots()
         shap.plots.waterfall(
             shap.Explanation(
                 values=shap_val,
@@ -90,13 +77,14 @@ def predict_and_explain(model, x_train, input_df, model_name):
                 data=input_df.values[0],
                 feature_names=input_df.columns.tolist()
             ),
-            
             show=False
         )
         st.pyplot(fig)
+        plt.close(fig)
 
     except Exception as e:
-        st.error(f"{e}")
+        st.error(f"Error: {e}")
+
 
 # ✅ 定義通用二元選單函式
 def binary_radio(label,key= None,index=None):
