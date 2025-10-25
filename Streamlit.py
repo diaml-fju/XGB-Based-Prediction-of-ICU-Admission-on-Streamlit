@@ -35,10 +35,6 @@ def predict_and_explain(model, x_train, input_df, model_name):
     import streamlit as st
     import xgboost as xgb
     st.subheader("Predict of Outcomes")
-    st.write("🔍 輸入資料預檢查")
-    for col in input_df.columns:
-        val = input_df[col].iloc[0]
-        st.write(f"{col}: {val} ({type(val)})")
     try:
         # 特徵對齊
         model_feature_names = model.get_booster().feature_names
@@ -79,8 +75,12 @@ def predict_and_explain(model, x_train, input_df, model_name):
         #explainer = shap.TreeExplainer(model, data=background,model_output="probability", feature_perturbation="interventional")
         #shap_values = explainer.shap_values(input_df)
 
-        st.write(input_df.dtypes)
-        st.write(input_df.head())
+        st.write("🔎 檢查 background 型態：")
+        for col in background.columns:
+            bad = background[col].apply(lambda x: isinstance(x, str) or isinstance(x, list)).any()
+            if bad:
+                st.error(f"❌ 欄位 {col} 含有非數值型資料")
+                st.write(background[col].head())
         explainer = shap.Explainer(model, background, algorithm="tree")
         shap_values = explainer(input_df)
         
