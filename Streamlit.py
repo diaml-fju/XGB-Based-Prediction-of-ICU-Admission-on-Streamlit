@@ -32,14 +32,32 @@ def predict_and_explain(model, x_train, input_df, model_name):
     import pandas as pd
     import numpy as np
     import streamlit as st
+    import re
     import xgboost as xgb
 
     st.subheader("Predict of Outcomes")
+
     try:
         # --- 特徵對齊 ---
         model_feature_names = model.get_booster().feature_names
         input_df = input_df[model_feature_names]
         background = x_train[model_feature_names]
+
+        # --- 數據清理 ---
+        def _to_float(x):
+            if isinstance(x, str):
+                x = re.sub(r'[\[\]\s,]', '', x)
+                try:
+                    return float(x)
+                except ValueError:
+                    return np.nan
+            return x
+
+        input_df = input_df.applymap(_to_float).astype(float)
+        background = background.applymap(_to_float).astype(float)
+
+        background = background.fillna(background.median())
+        input_df = input_df.fillna(background.median())
 
         # --- 預測 ---
         proba = model.predict_proba(input_df)[0, 1]
@@ -49,7 +67,7 @@ def predict_and_explain(model, x_train, input_df, model_name):
             "model C": 0.41806757,
             "model D": 0.10304403
         }
-        threshold = adaptive_thresholds[model_name]
+        threshold = adaptive_thresholds.get(model_name, 0.5)
 
         if proba >= threshold:
             st.error(f"Positive risk of ICU admission (probability={proba:.3f})")
@@ -69,7 +87,6 @@ def predict_and_explain(model, x_train, input_df, model_name):
 
         st.subheader("SHAP based personalized explanation")
 
-        #fig, ax = plt.subplots()
         shap.plots.waterfall(
             shap.Explanation(
                 values=shap_val,
@@ -85,6 +102,7 @@ def predict_and_explain(model, x_train, input_df, model_name):
 
     except Exception as e:
         st.error(f"Error: {e}")
+
 
 
 # ✅ 定義通用二元選單函式
