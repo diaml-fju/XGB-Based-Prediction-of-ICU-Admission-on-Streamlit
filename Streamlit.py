@@ -77,8 +77,16 @@ def predict_and_explain(model, x_train, input_df, model_name):
         # --- SHAP 解釋 ---
         explainer = shap.TreeExplainer(model, data=background, model_output="probability")
         shap_values = explainer.shap_values(input_df)
-        st.write(explainer)
-        st.write(shap_values)
+        # === 檢查 SHAP 對應數值 ===
+        st.write("🔍 SHAP values 檢查表：")
+
+        check_df = pd.DataFrame({
+            "Feature": input_df.columns,
+            "Feature_value": input_df.values[0],
+            "SHAP_value": shap_val
+        })
+
+        st.dataframe(check_df)
         if isinstance(shap_values, list):
             shap_val = shap_values[1][0]
             base_val = explainer.expected_value[1]
