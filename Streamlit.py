@@ -53,12 +53,12 @@ def predict_and_explain(model, x_train, input_df, model_name):
         #    st.success("Negative risk of ICU admission")
 
         #舊版
-        #proba = model.predict_proba(input_df)[0]
-        #positive_prob = proba[1]
+        proba = model.predict_proba(input_df)[0]
+        positive_prob = proba[1]
 
         # 預測-20251021
-        proba = model.predict_proba(input_df)
-        positive_prob = float(proba[0][1])  # ✅ 確保是 float
+        #proba = model.predict_proba(input_df)
+        #positive_prob = float(proba[0][1])  # ✅ 確保是 float
 
         adaptive_thresholds = {
 
@@ -73,8 +73,11 @@ def predict_and_explain(model, x_train, input_df, model_name):
         else:
             st.success(f"Negative risk of ICU admission")
         # SHAP 解釋
-        explainer = shap.TreeExplainer(model, data=background,model_output="probability", feature_perturbation="interventional")
-        shap_values = explainer.shap_values(input_df)
+        #explainer = shap.TreeExplainer(model, data=background,model_output="probability", feature_perturbation="interventional")
+        #shap_values = explainer.shap_values(input_df)
+
+        explainer = shap.Explainer(model, background, algorithm="tree")
+        shap_values = explainer(input_df)
         # ✅ 防止 index 錯誤
         shap_val = shap_values[0]
         #st.write("Shap_values",shap_values)
