@@ -167,7 +167,7 @@ download the file below:""")
     # 模型 & 資料（你之後替換正確路徑）
     import xgboost as xgb
     model = xgb.XGBClassifier()
-    model.load_model(r"MG_ICU_SHAP_XGB_EOMG_Fixed.json")
+    model.load_model(r"MG_ICU_SHAP_XGB_EOMG_Fix.json")
     x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup2_EOMG.csv")
     x_train = x.drop(columns=[ "Y","MGFA clinical classification"])
     # 輸入變數
