@@ -100,7 +100,7 @@ def predict_and_explain(model, x_train, input_df, model_name):
         )
         st.pyplot(fig)
 
-    #except Exception as e:
+    except Exception as e:
         #st.error(f"Error：{e}")
 
 # ✅ 定義通用二元選單函式
