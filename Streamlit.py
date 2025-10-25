@@ -84,14 +84,14 @@ def predict_and_explain(model, x_train, input_df, model_name):
         else:
             shap_val = shap_values[0]
             base_val = explainer.expected_value
-
+        input_row = input_df.values[0].astype(float)
         st.subheader("SHAP based personalized explanation")
 
         shap.plots.waterfall(
             shap.Explanation(
                 values=shap_val,
                 base_values=base_val,
-                data=input_df.values[0],
+                data=input_row,
                 feature_names=input_df.columns.tolist()
             ),
             show=False
