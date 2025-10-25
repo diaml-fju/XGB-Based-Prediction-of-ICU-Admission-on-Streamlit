@@ -76,10 +76,11 @@ def predict_and_explain(model, x_train, input_df, model_name):
         #explainer = shap.TreeExplainer(model, data=background,model_output="probability", feature_perturbation="interventional")
         #shap_values = explainer.shap_values(input_df)
 
-        st.write(input_df.dtypes)
-        st.write(input_df.head())
+        #st.write(input_df.dtypes)
+        #st.write(input_df.head())
         explainer = shap.Explainer(model, background, algorithm="tree")
         shap_values = explainer(input_df)
+        st.write(shap_values)
         # ✅ 防止 index 錯誤
         shap_val = shap_values[0]
         #st.write("Shap_values",shap_values)
