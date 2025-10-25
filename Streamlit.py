@@ -77,7 +77,14 @@ def predict_and_explain(model, x_train, input_df, model_name):
         # --- SHAP 解釋 ---
         explainer = shap.TreeExplainer(model, data=background, model_output="probability")
         shap_values = explainer.shap_values(input_df)
-        # === 檢查 SHAP 對應數值 ===
+        
+        if isinstance(shap_values, list):
+            shap_val = shap_values[1][0]
+            base_val = explainer.expected_value[1]
+        else:
+            shap_val = shap_values[0]
+            base_val = explainer.expected_value
+            # === 檢查 SHAP 對應數值 ===
         st.write("🔍 SHAP values 檢查表：")
 
         check_df = pd.DataFrame({
@@ -87,12 +94,6 @@ def predict_and_explain(model, x_train, input_df, model_name):
         })
 
         st.dataframe(check_df)
-        if isinstance(shap_values, list):
-            shap_val = shap_values[1][0]
-            base_val = explainer.expected_value[1]
-        else:
-            shap_val = shap_values[0]
-            base_val = explainer.expected_value
         input_df = input_df.fillna(0).astype(float)
         input_row = input_df.values[0].astype(float)
         st.subheader("SHAP based personalized explanation")
