@@ -72,10 +72,12 @@ def predict_and_explain(model, x_train, input_df, model_name):
             st.error(f"Positive risk of ICU admission")
         else:
             st.success(f"Negative risk of ICU admission")
-        # SHAP 解釋
+        # SHAP 解釋 - Old version
         #explainer = shap.TreeExplainer(model, data=background,model_output="probability", feature_perturbation="interventional")
         #shap_values = explainer.shap_values(input_df)
 
+        st.write(input_df.dtypes)
+        st.write(input_df.head())
         explainer = shap.Explainer(model, background, algorithm="tree")
         shap_values = explainer(input_df)
         # ✅ 防止 index 錯誤
