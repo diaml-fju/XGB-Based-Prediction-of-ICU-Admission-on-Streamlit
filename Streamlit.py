@@ -77,7 +77,8 @@ def predict_and_explain(model, x_train, input_df, model_name):
         # --- SHAP 解釋 ---
         explainer = shap.TreeExplainer(model, data=background, model_output="probability")
         shap_values = explainer.shap_values(input_df)
-
+        st.write(explainer)
+        st.write(shap_values)
         if isinstance(shap_values, list):
             shap_val = shap_values[1][0]
             base_val = explainer.expected_value[1]
