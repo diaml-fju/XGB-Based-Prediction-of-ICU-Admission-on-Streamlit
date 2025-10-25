@@ -49,7 +49,7 @@ def predict_and_explain(model, x_train, input_df, model_name):
             "Thymoma": 0.41806757,
             "Non-Thymoma": 0.10304403
         }
-        threshold = adaptive_thresholds[model_choice]
+        threshold = adaptive_thresholds[model_name]
 
         if proba >= threshold:
             st.error(f"Positive risk of ICU admission (probability={proba:.3f})")
@@ -69,7 +69,7 @@ def predict_and_explain(model, x_train, input_df, model_name):
 
         st.subheader("SHAP based personalized explanation")
 
-        fig, ax = plt.subplots()
+        #fig, ax = plt.subplots()
         shap.plots.waterfall(
             shap.Explanation(
                 values=shap_val,
@@ -79,6 +79,7 @@ def predict_and_explain(model, x_train, input_df, model_name):
             ),
             show=False
         )
+        fig = plt.gcf()
         st.pyplot(fig)
         plt.close(fig)
 
