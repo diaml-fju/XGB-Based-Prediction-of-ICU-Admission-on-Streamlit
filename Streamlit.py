@@ -25,30 +25,6 @@ model_choice = st.sidebar.selectbox("",[
 st.sidebar.title("Important varialbes input")
 #tab1, tab2, tab3, tab4 = st.tabs(["EOMG", "LOMG", "Thymoma", "Non-Thymoma"])
 
-def clean_background(df):
-    df_clean = df.copy()
-    for col in df_clean.columns:
-        # 找出含中括號的欄位
-        bad_mask = df_clean[col].astype(str).str.contains(r'\[', regex=True)
-        if bad_mask.any():
-            st.warning(f"⚠️ 欄位 {col} 含中括號格式的字串資料，正在自動修正...")
-            st.write("前幾筆原始值：", df_clean.loc[bad_mask, col].head().tolist())
-
-            # 嘗試轉換每一個值
-            def fix_value(x):
-                if isinstance(x, str):
-                    # 移除中括號與空白
-                    x = re.sub(r'[\[\]\s]', '', x)
-                    try:
-                        return float(x)
-                    except:
-                        return np.nan
-                return x
-
-            df_clean[col] = df_clean[col].apply(fix_value)
-            st.success(f"✅ 欄位 {col} 修正完成")
-
-    return df_clean
 # ------------------------- 共用函數：預測 + SHAP -------------------------
 def predict_and_explain(model, x_train, input_df, model_name):
     import shap
@@ -63,12 +39,6 @@ def predict_and_explain(model, x_train, input_df, model_name):
         model_feature_names = model.get_booster().feature_names
         input_df = input_df[model_feature_names]
         background = x_train[model_feature_names]
-        # 執行清理
-        st.subheader("🔍 檢查 background 型態：")
-        background = clean_background(background)
-        # 確認結果
-        st.write("清理後型態：")
-        st.write(background.dtypes)
         # 預測
         #proba = model.predict_proba(input_df)[0]
         #pred_class = int(np.argmax(proba))
@@ -84,7 +54,6 @@ def predict_and_explain(model, x_train, input_df, model_name):
         # 預測-20251021
         #proba = model.predict_proba(input_df)
         #positive_prob = float(proba[0][1])  # ✅ 確保是 float
-        
         adaptive_thresholds = {
 
             "EOMG":0.14298505,
@@ -98,14 +67,17 @@ def predict_and_explain(model, x_train, input_df, model_name):
         else:
             st.success(f"Negative risk of ICU admission")
         # SHAP 解釋 - Old version
-        #explainer = shap.TreeExplainer(model, data=background,model_output="probability", feature_perturbation="interventional")
-        #shap_values = explainer.shap_values(input_df)
+        explainer = shap.TreeExplainer(model, data=background,model_output="probability", feature_perturbation="interventional")
+        shap_values = explainer.shap_values(input_df)
 
-        explainer = shap.Explainer(model, background, algorithm="tree")
-        shap_values = explainer(input_df)
-        
+        if isinstance(shap_values, list):
+            shap_val = shap_values[1][0]  # 取 class 1 (positive) 的 shap 值
+            base_val = explainer.expected_value[1]
+        else:
+            shap_val = shap_values[0]
+            base_val = explainer.expected_value
         # ✅ 防止 index 錯誤
-        shap_val = shap_values[0]
+        #shap_val = shap_values[0]
         #st.write("Shap_values",shap_values)
         #st.write("SHAP",shap_val)
         base_val = explainer.expected_value
