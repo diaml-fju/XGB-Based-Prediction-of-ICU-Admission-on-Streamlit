@@ -63,15 +63,15 @@ def predict_and_explain(model, x_train, input_df, model_name):
         model_feature_names = model.get_booster().feature_names
         input_df = input_df[model_feature_names]
         background = x_train[model_feature_names]
-        for col in background.columns:
-            bad = background[col].astype(str).str.contains("\[", regex=True).any()
-            if bad:
-                print(f"⚠️ 欄位 {col} 有帶中括號的字串資料")
+        # 執行清理
+        st.subheader("🔍 檢查 background 型態：")
+        background = clean_background(background)
+        # 確認結果
+        st.write("清理後型態：")
+        st.write(background.dtypes)
         # 預測
         #proba = model.predict_proba(input_df)[0]
         #pred_class = int(np.argmax(proba))
-        
-
         #if pred_class == 1:
         #    st.error("Positive risk of ICU admission")
         #else:
