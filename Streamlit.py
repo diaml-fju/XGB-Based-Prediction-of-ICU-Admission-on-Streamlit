@@ -38,6 +38,18 @@ def predict_and_explain(model, x_train, input_df, model_name):
     st.subheader("Predict of Outcomes")
 
     try:
+        # === 修正模型 base_score ===
+        booster = model.get_booster()
+        attrs = booster.attributes()
+        if "base_score" in attrs and isinstance(attrs["base_score"], str):
+            base = re.sub(r'[\[\]\s]', '', attrs["base_score"])
+            try:
+                base_val = float(base)
+                booster.set_attr(base_score=str(base_val))
+                st.info(f"🔧 已修正模型 base_score：{base_val}")
+            except:
+                st.warning(f"⚠️ base_score 修正失敗：{attrs['base_score']}")
+
         # --- 特徵對齊 ---
         model_feature_names = model.get_booster().feature_names
         input_df = input_df[model_feature_names]
@@ -53,9 +65,8 @@ def predict_and_explain(model, x_train, input_df, model_name):
                     return np.nan
             return x
 
-        input_df = input_df.applymap(_to_float).astype(float)
-        background = background.applymap(_to_float).astype(float)
-
+        input_df = input_df.applymap(_to_float)
+        background = background.applymap(_to_float)
         background = background.fillna(background.median())
         input_df = input_df.fillna(background.median())
 
@@ -77,27 +88,24 @@ def predict_and_explain(model, x_train, input_df, model_name):
         # --- SHAP 解釋 ---
         explainer = shap.TreeExplainer(model, data=background, model_output="probability")
         shap_values = explainer.shap_values(input_df)
-        
+
         if isinstance(shap_values, list):
             shap_val = shap_values[1][0]
             base_val = explainer.expected_value[1]
         else:
             shap_val = shap_values[0]
             base_val = explainer.expected_value
-            # === 檢查 SHAP 對應數值 ===
-        st.write("🔍 SHAP values 檢查表：")
 
+        st.subheader("🔍 SHAP values 檢查表：")
         check_df = pd.DataFrame({
             "Feature": input_df.columns,
             "Feature_value": input_df.values[0],
             "SHAP_value": shap_val
         })
-
         st.dataframe(check_df)
-        input_df = input_df.fillna(0).astype(float)
+
         input_row = input_df.values[0].astype(float)
         st.subheader("SHAP based personalized explanation")
-
         shap.plots.waterfall(
             shap.Explanation(
                 values=shap_val,
@@ -115,6 +123,7 @@ def predict_and_explain(model, x_train, input_df, model_name):
         import traceback
         st.error("⚠️ 發生錯誤，完整訊息如下：")
         st.text("".join(traceback.format_exception(None, e, e.__traceback__)))
+
 
 
 
