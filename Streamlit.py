@@ -40,7 +40,10 @@ def predict_and_explain(model, x_train, input_df, model_name):
         model_feature_names = model.get_booster().feature_names
         input_df = input_df[model_feature_names]
         background = x_train[model_feature_names]
-
+        for col in background.columns:
+            bad = background[col].astype(str).str.contains("\[", regex=True).any()
+            if bad:
+                print(f"⚠️ 欄位 {col} 有帶中括號的字串資料")
         # 預測
         #proba = model.predict_proba(input_df)[0]
         #pred_class = int(np.argmax(proba))
