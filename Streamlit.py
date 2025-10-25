@@ -78,12 +78,6 @@ def predict_and_explain(model, x_train, input_df, model_name):
         #explainer = shap.TreeExplainer(model, data=background,model_output="probability", feature_perturbation="interventional")
         #shap_values = explainer.shap_values(input_df)
 
-        st.write("🔎 檢查 background 型態：")
-        for col in background.columns:
-            bad = background[col].apply(lambda x: isinstance(x, str) or isinstance(x, list)).any()
-            if bad:
-                st.error(f"❌ 欄位 {col} 含有非數值型資料")
-                st.write(background[col].head())
         explainer = shap.Explainer(model, background, algorithm="tree")
         shap_values = explainer(input_df)
         
@@ -106,8 +100,8 @@ def predict_and_explain(model, x_train, input_df, model_name):
         )
         st.pyplot(fig)
 
-    except Exception as e:
-        st.error(f"Error：{e}")
+    #except Exception as e:
+        #st.error(f"Error：{e}")
 
 # ✅ 定義通用二元選單函式
 def binary_radio(label,key= None,index=None):
