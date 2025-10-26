@@ -24,6 +24,32 @@ model_choice = st.sidebar.selectbox("",[
 ])
 st.sidebar.title("Important varialbes input")
 #tab1, tab2, tab3, tab4 = st.tabs(["EOMG", "LOMG", "Thymoma", "Non-Thymoma"])
+import re
+
+def patch_xgb_base_score_in_memory(model, st=None):
+    """
+    直接修改 XGBoost Booster 的 JSON config，將
+    "base_score":"[1.6167288E-1]" 之類字串修成 "0.16167288"
+    """
+    booster = model.get_booster()
+    cfg = booster.save_config()  # SHAP 會解析這個 JSON
+
+    # 抓出 base_score 值，允許有/沒有方括號
+    m = re.search(r'"base_score"\s*:\s*"\[?([0-9Ee+\-\.]+)\]?"', cfg)
+    if not m:
+        if st: st.info("ℹ️ 未在 Booster config 找到 base_score（可忽略）")
+        return False
+
+    raw = m.group(0)                 # e.g. "base_score":"[1.6167288E-1]"
+    val = float(m.group(1))          # -> 0.16167288
+    fixed = f'"base_score":"{val}"'  # "base_score":"0.16167288"
+
+    if raw == fixed:
+        return False  # 已是正確格式
+
+    booster.load_config(cfg.replace(raw, fixed))  # 直接回寫到 Booster
+    if st: st.success(f"🔧 已修正 Booster config 的 base_score → {val}")
+    return True
 
 # ------------------------- 共用函數：預測 + SHAP -------------------------
 def predict_and_explain(model, x_train, input_df, model_name):
@@ -54,7 +80,8 @@ def predict_and_explain(model, x_train, input_df, model_name):
         model_feature_names = model.get_booster().feature_names
         input_df = input_df[model_feature_names]
         background = x_train[model_feature_names]
-
+        # ✅ 關鍵：在建立 TreeExplainer 前，先修補 base_score
+        patch_xgb_base_score_in_memory(model, st)
 
         # --- 預測 ---
         proba = model.predict_proba(input_df)[0, 1]
