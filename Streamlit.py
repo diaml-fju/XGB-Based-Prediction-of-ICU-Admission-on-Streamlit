@@ -99,7 +99,8 @@ def predict_and_explain(model, x_train, input_df, model_name):
             st.success(f"Negative risk of ICU admission (probability={proba:.3f})")
 
         # --- SHAP 解釋 ---
-        explainer = shap.TreeExplainer(model, data=background, model_output="probability")
+        booster = model.get_booster()  # 這就是剛被 patch_xgb_base_score_in_memory 修過的那份
+        explainer = shap.TreeExplainer(booster, data=background, model_output="probability")
         shap_values = explainer.shap_values(input_df)
 
         if isinstance(shap_values, list):
