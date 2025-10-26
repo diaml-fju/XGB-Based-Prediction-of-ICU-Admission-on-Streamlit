@@ -157,7 +157,7 @@ download the file below:""")
     # 模型 & 資料（你之後替換正確路徑）
     import xgboost as xgb
     model = xgb.XGBClassifier()
-    model.load_model(r"MG_ICU_SHAP_XGB_EOMG_Fix.json")
+    model.load_model(r"MG_ICU_SHAP_XGB_EOMG_2.json")
     x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup2_EOMG.csv")
     x_train = x.drop(columns=[ "Y","MGFA clinical classification"])
     # 輸入變數
@@ -280,7 +280,7 @@ download the file below:""")
     # 模型 & 資料（你之後替換正確路徑）
     import xgboost as xgb
     model = xgb.XGBClassifier()
-    model.load_model(r"MG_ICU_SHAP_XGB_LOMG.json")
+    model.load_model(r"MG_ICU_SHAP_XGB_LOMG_2.json")
     x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup2_LOMG.csv")
     x_train = x.drop(columns=[ "Y","MGFA clinical classification"])
     # ➤ Clinical variables
@@ -395,7 +395,7 @@ download the file below:""")
     # 模型 & 資料（你之後替換正確路徑）
     import xgboost as xgb
     model = xgb.XGBClassifier()
-    model.load_model(r"MG_ICU_SHAP_XGB_Thymoma.json")
+    model.load_model(r"MG_ICU_SHAP_XGB_Thymoma_2.json")
     x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup1_Thymoma_Yes.csv")
     x_train = x.drop(columns=[ "Y"])
     # 輸入變數
@@ -503,7 +503,7 @@ download the file below:""")
     # 模型 & 資料（你之後替換正確路徑）
     import xgboost as xgb
     model = xgb.XGBClassifier()
-    model.load_model(r"MG_ICU_SHAP_XGB_NonThymoma.json")
+    model.load_model(r"MG_ICU_SHAP_XGB_NonThymoma_2.json")
     x = pd.read_csv(r"MG_ICU_SHAP_Model_Data_SubGroup1_Thymoma_No.csv")
     x_train = x.drop(columns=[ "Y"])
     # ➤ Clinical variables
