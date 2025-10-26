@@ -57,8 +57,6 @@ def predict_and_explain(model, x_train, input_df, model_name):
         model_feature_names = model.get_booster().feature_names
         input_df = input_df[model_feature_names]
         background = x_train[model_feature_names]
-        # ✅ 關鍵：在建立 TreeExplainer 前，先修補 base_score
-        patch_xgb_base_score_in_memory(model, st)
 
         # --- 預測 ---
         proba = model.predict_proba(input_df)[0, 1]
@@ -76,7 +74,7 @@ def predict_and_explain(model, x_train, input_df, model_name):
             st.success(f"Negative risk of ICU admission (probability={proba:.3f})")
 
         # --- SHAP 解釋 ---
-        booster = model.get_booster()  # 這就是剛被 patch_xgb_base_score_in_memory 修過的那份
+        booster = model.get_booster()
         explainer = shap.TreeExplainer(booster, data=background, model_output="probability")
         shap_values = explainer.shap_values(input_df)
 
