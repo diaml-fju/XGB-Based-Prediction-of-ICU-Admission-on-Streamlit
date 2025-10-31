@@ -39,20 +39,8 @@ def predict_and_explain(model, x_train, input_df, model_name):
     import xgboost as xgb
 
     st.subheader("Predict of Outcomes")
-    
-    try:
-        # === 修正模型 base_score ===
-        booster = model.get_booster()
-        attrs = booster.attributes()
-        if "base_score" in attrs and isinstance(attrs["base_score"], str):
-            base = re.sub(r'[\[\]\s]', '', attrs["base_score"])
-            try:
-                base_val = float(base)
-                booster.set_attr(base_score=str(base_val))
-                st.info(f"🔧 已修正模型 base_score：{base_val}")
-            except:
-                st.warning(f"⚠️ base_score 修正失敗：{attrs['base_score']}")
 
+    try:
         # --- 特徵對齊 ---
         model_feature_names = model.get_booster().feature_names
         input_df = input_df[model_feature_names]
@@ -73,37 +61,30 @@ def predict_and_explain(model, x_train, input_df, model_name):
         else:
             st.success(f"Negative risk of ICU admission (probability={proba:.3f})")
 
-        # --- SHAP 解釋 ---
-        booster = model.get_booster()
-        explainer = shap.TreeExplainer(booster, data=background, model_output="probability")
-        shap_values = explainer.shap_values(input_df)
-
-        if isinstance(shap_values, list):
-            shap_val = shap_values[1][0]
-            base_val = explainer.expected_value[1]
-        else:
-            shap_val = shap_values[0]
-            base_val = explainer.expected_value
-
-        st.subheader("🔍 SHAP values 檢查表：")
-        check_df = pd.DataFrame({
-            "Feature": input_df.columns,
-            "Feature_value": input_df.values[0],
-            "SHAP_value": shap_val
-        })
-        st.dataframe(check_df)
-
-        input_row = input_df.values[0].astype(float)
+        # === KernelExplainer ===
         st.subheader("SHAP based personalized explanation")
+
+        # ⚠️ 避免背景太大導致運算過久，只取樣本部分
+        background_sample = background.sample(n=min(50, len(background)), random_state=42)
+
+        # ⚠️ KernelExplainer 接受 predict_proba 的第二欄作為目標
+        explainer = shap.KernelExplainer(lambda x: model.predict_proba(x)[:, 1], background_sample)
+
+        # 只針對單筆輸入解釋
+        input_row = input_df.iloc[[0]]
+        shap_values = explainer.shap_values(input_row)
+
+        # === SHAP 視覺化 ===
         shap.plots.waterfall(
             shap.Explanation(
-                values=shap_val,
-                base_values=base_val,
-                data=input_row,
-                feature_names=input_df.columns.tolist()
+                values=shap_values[0],
+                base_values=explainer.expected_value,
+                data=input_row.values[0],
+                feature_names=input_row.columns.tolist()
             ),
             show=False
         )
+
         fig = plt.gcf()
         st.pyplot(fig)
         plt.close(fig)
